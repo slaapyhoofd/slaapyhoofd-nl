@@ -1,4 +1,3 @@
-import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import * as postsService from '@/services/posts';
@@ -6,7 +5,6 @@ import * as commentsService from '@/services/comments';
 import './Dashboard.css';
 
 function Dashboard() {
-  const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [stats, setStats] = useState({
     totalPosts: 0,
@@ -44,76 +42,63 @@ function Dashboard() {
     }
   };
 
-  const handleLogout = async () => {
-    await logout();
-    navigate('/admin/login');
-  };
-
   return (
-    <div className="container">
-      <div className="dashboard">
-        <header className="dashboard-header">
-          <h1>Admin Dashboard</h1>
-          <div className="dashboard-actions">
-            <span className="user-info">Welcome, {user?.username}</span>
-            <button onClick={handleLogout} className="btn btn-secondary">
-              Logout
-            </button>
+    <div className="dashboard">
+      {loading ? (
+        <div className="dashboard-stats-belt">
+          <div role="status" style={{ padding: '2rem', color: 'rgba(243,237,226,.5)' }}>
+            <div className="loading" aria-hidden="true" style={{ borderTopColor: 'var(--color-sage)' }}></div>
           </div>
-        </header>
+        </div>
+      ) : error ? (
+        <div className="dashboard-stats-belt">
+          <p role="alert" style={{ color: 'var(--color-coral)', padding: '2rem' }}>{error}</p>
+        </div>
+      ) : (
+        <div className="dashboard-stats-belt">
+          <div className="stat-cell">
+            <div className="stat-number">{stats.totalPosts}</div>
+            <div className="stat-label">Total Posts</div>
+          </div>
+          <div className="stat-cell">
+            <div className="stat-number stat-number--sage">{stats.publishedPosts}</div>
+            <div className="stat-label">Published</div>
+          </div>
+          <div className="stat-cell">
+            <div className="stat-number stat-number--dim">{stats.draftPosts}</div>
+            <div className="stat-label">Drafts</div>
+          </div>
+          <div className="stat-cell stat-cell--last">
+            <div className="stat-number stat-number--dim">{stats.pendingComments}</div>
+            <div className="stat-label">Pending</div>
+          </div>
+        </div>
+      )}
 
-        <div className="dashboard-content">
-          {loading ? (
-            <div role="status" className="loading-container">
-              <div className="loading" aria-hidden="true"></div>
-              <p>Loading stats...</p>
-            </div>
-          ) : error ? (
-            <p role="alert" className="error-message">{error}</p>
-          ) : (
-            <>
-              <div className="dashboard-grid">
-                <div className="stat-card">
-                  <h3>Total Posts</h3>
-                  <p className="stat-number">{stats.totalPosts}</p>
-                </div>
-                <div className="stat-card">
-                  <h3>Published</h3>
-                  <p className="stat-number">{stats.publishedPosts}</p>
-                </div>
-                <div className="stat-card">
-                  <h3>Drafts</h3>
-                  <p className="stat-number">{stats.draftPosts}</p>
-                </div>
-                <div className="stat-card">
-                  <h3>Pending Comments</h3>
-                  <p className="stat-number">{stats.pendingComments}</p>
-                </div>
-              </div>
-
-              <div className="quick-actions">
-                <h2>Quick Actions</h2>
-                <div className="action-buttons">
-                  <button className="btn btn-primary" onClick={() => navigate('/admin/posts/new')}>
-                    Create New Post
-                  </button>
-                  <button className="btn btn-secondary" onClick={() => navigate('/admin/posts')}>
-                    Manage Posts
-                  </button>
-                  <button className="btn btn-secondary" onClick={() => navigate('/admin/comments')}>
-                    Moderate Comments
-                  </button>
-                </div>
-              </div>
-
-              <div className="recent-activity">
-                <h2>Recent Activity</h2>
-                <p className="text-center" style={{ color: 'var(--color-text-light)', padding: 'var(--spacing-xl)' }}>
-                  No recent activity
-                </p>
-              </div>
-            </>
-          )}
+      <div className="dashboard-body">
+        <div className="quick-actions-label">Quick Actions</div>
+        <div className="quick-actions-grid">
+          <button
+            className="action-card action-card--primary"
+            onClick={() => navigate('/admin/posts/new')}
+          >
+            <span className="action-card-eyebrow">New</span>
+            <span className="action-card-title">Create Post</span>
+          </button>
+          <button
+            className="action-card"
+            onClick={() => navigate('/admin/posts')}
+          >
+            <span className="action-card-eyebrow">Manage</span>
+            <span className="action-card-title">All Posts</span>
+          </button>
+          <button
+            className="action-card"
+            onClick={() => navigate('/admin/comments')}
+          >
+            <span className="action-card-eyebrow">Review</span>
+            <span className="action-card-title">Comments</span>
+          </button>
         </div>
       </div>
     </div>

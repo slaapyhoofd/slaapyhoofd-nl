@@ -4,14 +4,14 @@ interface PostsHeaderProps {
   title?: string;
 }
 
-function PostsHeader({ title = 'Manage Posts' }: PostsHeaderProps) {
+function PostsHeader({ title = 'Posts' }: PostsHeaderProps) {
   return (
-    <header className="posts-header">
-      <h1>{title}</h1>
-      <Link to="/admin/posts/new" className="btn btn-primary">
-        Create New Post
+    <div className="posts-page-header">
+      <h1 className="posts-page-title">{title}</h1>
+      <Link to="/admin/posts/new" className="btn btn-primary posts-new-btn">
+        + New Post
       </Link>
-    </header>
+    </div>
   );
 }
 

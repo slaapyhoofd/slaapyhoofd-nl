@@ -38,16 +38,14 @@ function CommentModerationContent() {
 function CommentModeration() {
   return (
     <CommentModerationProvider>
-      <div className="container">
-        <div className="comment-moderation">
-          <header className="moderation-header">
-            <h1>Comment Moderation</h1>
-            <ModerationStats />
-          </header>
+      <div className="comment-moderation">
+        <header className="moderation-header">
+          <h1>Comments</h1>
+          <ModerationStats />
+        </header>
 
-          <ModerationFilters />
-          <CommentModerationContent />
-        </div>
+        <ModerationFilters />
+        <CommentModerationContent />
       </div>
     </CommentModerationProvider>
   );

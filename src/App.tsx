@@ -1,8 +1,10 @@
 import { lazy, Suspense, useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Outlet, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { CategoriesProvider } from './contexts/CategoriesContext';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import AdminLayout from './components/AdminLayout/AdminLayout';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import Home from './pages/Home';
 import BlogPost from './pages/BlogPost';
@@ -16,7 +18,7 @@ const PostEditor = lazy(() => import('./pages/Admin/PostEditor'));
 const CommentModeration = lazy(() => import('./pages/Admin/CommentModeration'));
 
 const AdminFallback = () => (
-  <div className="container">
+  <div style={{ padding: '2rem' }}>
     <div role="status" className="loading-container">
       <div className="loading" aria-hidden="true"></div>
       <p>Loading admin...</p>
@@ -49,73 +51,88 @@ function RouteAnnouncer() {
   );
 }
 
+/** Public layout: Header + main content + Footer */
+function PublicLayout() {
+  return (
+    <CategoriesProvider>
+      <div className="app">
+        <Header />
+        <main id="main-content" className="main-content">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+    </CategoriesProvider>
+  );
+}
+
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="app">
-          <Header />
-          <RouteAnnouncer />
-          <main id="main-content" className="main-content">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/post/:slug" element={<BlogPost />} />
-              <Route path="/admin/login" element={<Login />} />
-              <Route
-                path="/admin"
-                element={
-                  <ProtectedRoute>
-                    <Suspense fallback={<AdminFallback />}>
-                      <Dashboard />
-                    </Suspense>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/posts"
-                element={
-                  <ProtectedRoute>
-                    <Suspense fallback={<AdminFallback />}>
-                      <PostsList />
-                    </Suspense>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/posts/new"
-                element={
-                  <ProtectedRoute>
-                    <Suspense fallback={<AdminFallback />}>
-                      <PostEditor />
-                    </Suspense>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/posts/edit/:id"
-                element={
-                  <ProtectedRoute>
-                    <Suspense fallback={<AdminFallback />}>
-                      <PostEditor />
-                    </Suspense>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/comments"
-                element={
-                  <ProtectedRoute>
-                    <Suspense fallback={<AdminFallback />}>
-                      <CommentModeration />
-                    </Suspense>
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
+        <RouteAnnouncer />
+        <Routes>
+          {/* Public routes */}
+          <Route element={<PublicLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/post/:slug" element={<BlogPost />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+
+          {/* Admin login — standalone (no sidebar, no public header) */}
+          <Route path="/admin/login" element={<Login />} />
+
+          {/* Admin routes — sidebar layout */}
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route
+              index
+              element={
+                <Suspense fallback={<AdminFallback />}>
+                  <Dashboard />
+                </Suspense>
+              }
+            />
+            <Route
+              path="posts"
+              element={
+                <Suspense fallback={<AdminFallback />}>
+                  <PostsList />
+                </Suspense>
+              }
+            />
+            <Route
+              path="posts/new"
+              element={
+                <Suspense fallback={<AdminFallback />}>
+                  <PostEditor />
+                </Suspense>
+              }
+            />
+            <Route
+              path="posts/edit/:id"
+              element={
+                <Suspense fallback={<AdminFallback />}>
+                  <PostEditor />
+                </Suspense>
+              }
+            />
+            <Route
+              path="comments"
+              element={
+                <Suspense fallback={<AdminFallback />}>
+                  <CommentModeration />
+                </Suspense>
+              }
+            />
+          </Route>
+        </Routes>
       </Router>
     </AuthProvider>
   );

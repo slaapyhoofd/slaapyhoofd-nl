@@ -1,0 +1,128 @@
+/* PostFilters — works on both pine/forest dark backgrounds */
+
+/* ── Tab switcher (desktop tabs mode) ── */
+.post-filters--tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.post-filters-tablist {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.post-filters-tab {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  border-bottom: 1.5px solid transparent;
+  padding: 0 0 3px;
+  cursor: pointer;
+  color: rgba(243, 237, 226, 0.35);
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.post-filters-tab--active {
+  color: var(--color-coral);
+  border-bottom-color: var(--color-coral);
+}
+
+/* Dot indicator when tab has an active filter but is not the active tab */
+.post-filters-tab--has-filter:not(.post-filters-tab--active)::after {
+  content: '·';
+  margin-left: 3px;
+  color: var(--color-coral);
+}
+
+.post-filters-tab:hover:not(.post-filters-tab--active) {
+  color: var(--color-cream);
+}
+
+.post-filters-tab:focus-visible {
+  outline: 3px solid var(--color-coral);
+  outline-offset: 3px;
+}
+
+.post-filters-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* ── Inline mode (mobile) ── */
+.post-filters--inline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Shared section styles ── */
+.post-filters-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(243, 237, 226, 0.4);
+  margin-bottom: 10px;
+}
+
+/* ── Pills ── */
+.post-filters-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: flex-end; /* right-align in tabs mode */
+}
+
+.post-filters--inline .post-filters-pills {
+  justify-content: flex-start;
+}
+
+.post-filters-pills--months {
+  margin-top: 5px;
+}
+
+.post-filter-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: rgba(243, 237, 226, 0.7);
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.post-filter-pill--sm {
+  font-size: 9px;
+  padding: 3px 8px;
+  opacity: 0.9;
+}
+
+.post-filter-pill--active {
+  background: var(--color-coral);
+  color: var(--color-cream);
+  font-weight: 700;
+}
+
+.post-filter-pill:hover:not(.post-filter-pill--active) {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--color-cream);
+}
+
+.post-filter-pill:focus-visible {
+  outline: 3px solid var(--color-coral);
+  outline-offset: 2px;
+}

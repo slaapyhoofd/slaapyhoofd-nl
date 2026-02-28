@@ -1,24 +1,62 @@
-import { Link } from 'react-router-dom';
+import { useState, useCallback } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import MobileNav from '@/components/MobileNav';
 import './Header.css';
-import { config } from '@/config';
 
 function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const toggleMenu = useCallback(() => setMenuOpen(v => !v), []);
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
+
   return (
-    <header className="header">
-      <div className="container">
-        <div className="header-content">
-          <Link to="/" className="header-logo">
-            {config.siteName}
+    <>
+      <header className="header">
+        <div className="header-inner">
+          <Link to="/" className="header-logo" onClick={closeMenu}>
+            slaapyhoofd<span className="header-logo-tld">.nl</span>
           </Link>
+
+          {/* Desktop nav */}
           <nav className="header-nav" aria-label="Main navigation">
             <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/about">About</Link></li>
+              <li>
+                <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>
+                  About
+                </Link>
+              </li>
             </ul>
           </nav>
+
+          {/* Hamburger button — mobile only */}
+          <button
+            className={`header-hamburger${menuOpen ? ' header-hamburger--open' : ''}`}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            onClick={toggleMenu}
+          >
+            {menuOpen ? (
+              <span className="header-hamburger-close">✕</span>
+            ) : (
+              <>
+                <span></span>
+                <span></span>
+                <span></span>
+              </>
+            )}
+          </button>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Mobile nav — rendered outside header to cover full screen */}
+      <MobileNav isOpen={menuOpen} onClose={closeMenu} />
+    </>
   );
 }
 

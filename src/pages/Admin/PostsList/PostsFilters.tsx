@@ -15,7 +15,7 @@ function PostsFilters({ filter, onFilterChange }: PostsFiltersProps) {
       {FILTER_OPTIONS.map((option) => (
         <button
           key={option.value}
-          className={`filter-btn ${filter === option.value ? 'active' : ''}`}
+          className={`filter-tab${filter === option.value ? ' filter-tab--active' : ''}`}
           aria-pressed={filter === option.value}
           onClick={() => onFilterChange(option.value)}
         >

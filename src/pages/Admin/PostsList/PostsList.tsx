@@ -9,13 +9,13 @@ function PostsList() {
   const { posts, loading, filter, setFilter, handleDelete } = usePostsList();
 
   return (
-    <div className="container">
-      <div className="posts-list">
-        <PostsHeader />
-        <PostsFilters filter={filter} onFilterChange={setFilter} />
+    <div className="posts-list">
+      <PostsHeader />
+      <PostsFilters filter={filter} onFilterChange={setFilter} />
 
+      <div className="posts-list-body">
         {loading ? (
-          <div role="status" className="loading-container">
+          <div role="status" className="loading-container" style={{ padding: '2rem' }}>
             <div className="loading" aria-hidden="true"></div>
             <p>Loading posts...</p>
           </div>

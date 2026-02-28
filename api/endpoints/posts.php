@@ -29,7 +29,8 @@ if ($method === 'GET' && count($pathParts) === 2 && $pathParts[1] === 'posts') {
         // Get posts
         $stmt = $db->prepare("
             SELECT id, slug, title, excerpt, author, category, tags, 
-                   featured_image, published_at, views
+                   featured_image, published_at, views,
+                   SUBSTRING(markdown_content, 1, 600) AS markdown_content
             FROM posts 
             WHERE status = 'published'
             ORDER BY published_at DESC

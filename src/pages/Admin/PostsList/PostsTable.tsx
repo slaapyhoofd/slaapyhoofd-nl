@@ -7,6 +7,12 @@ interface PostsTableProps {
   onDelete: (id: number) => void;
 }
 
+const STATUS_DOT_COLORS: Record<string, string> = {
+  published: '#2e7d32',
+  draft:     'var(--color-parchment)',
+  archived:  'var(--color-mid)',
+};
+
 function PostsTable({ posts, onDelete }: PostsTableProps) {
   return (
     <div className="posts-table">
@@ -21,30 +27,35 @@ function PostsTable({ posts, onDelete }: PostsTableProps) {
             <th>Status</th>
             <th>Date</th>
             <th>Views</th>
-            <th>Actions</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           {posts.map((post) => (
             <tr key={post.id}>
-              <td className="post-title">
-                <strong>{post.title}</strong>
+              <td className="post-title-cell">
+                <div className="post-title-main">{post.title}</div>
                 {post.excerpt && (
                   <div className="post-excerpt">{post.excerpt}</div>
                 )}
               </td>
-              <td>{post.category || '-'}</td>
+              <td className="post-category-cell">{post.category || '—'}</td>
               <td>
-                <span className={`status-badge status-${post.status}`}>
-                  {post.status}
-                </span>
+                <div className="post-status">
+                  <span
+                    className="post-status-dot"
+                    style={{ background: STATUS_DOT_COLORS[post.status] ?? 'var(--color-parchment)' }}
+                    aria-hidden="true"
+                  />
+                  <span>{post.status}</span>
+                </div>
               </td>
-              <td>{formatDate(post.created_at)}</td>
-              <td>{post.views}</td>
+              <td className="post-date-cell">{formatDate(post.created_at)}</td>
+              <td className="post-views-cell">{post.views}</td>
               <td className="post-actions">
                 <Link
                   to={`/admin/posts/edit/${post.id}`}
-                  className="btn btn-secondary btn-sm"
+                  className="post-action-link post-action-link--edit"
                   aria-label={`Edit post: ${post.title}`}
                 >
                   Edit
@@ -55,7 +66,7 @@ function PostsTable({ posts, onDelete }: PostsTableProps) {
                       onDelete(post.id);
                     }
                   }}
-                  className="btn btn-secondary btn-sm btn-danger"
+                  className="post-action-link post-action-link--delete"
                   aria-label={`Delete post: ${post.title}`}
                 >
                   Delete

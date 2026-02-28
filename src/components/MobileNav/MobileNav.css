@@ -1,0 +1,129 @@
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  background: var(--color-forest);
+  z-index: var(--z-modal);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+  pointer-events: none;
+}
+
+.mobile-nav--open {
+  transform: translateX(0);
+  pointer-events: all;
+}
+
+/* Header row — same height as nav bar */
+.mobile-nav-header {
+  height: 40px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.mobile-nav-logo {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  color: var(--color-cream);
+  text-decoration: none;
+}
+
+.mobile-nav-logo-tld {
+  color: var(--color-coral);
+}
+
+.mobile-nav-close {
+  background: none;
+  border: none;
+  color: var(--color-cream);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px;
+  transition: color var(--transition-fast);
+}
+
+.mobile-nav-close:hover {
+  color: var(--color-coral);
+}
+
+.mobile-nav-close:focus-visible {
+  outline: 3px solid var(--color-coral);
+  outline-offset: 2px;
+}
+
+/* Nav links */
+.mobile-nav-links {
+  padding: 8px 20px 0;
+  overflow-y: visible;
+  flex-shrink: 0;
+}
+
+.mobile-nav-links ul {
+  list-style: none;
+}
+
+.mobile-nav-item a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.mobile-nav-item .mobile-nav-label {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: rgba(243, 237, 226, 0.5);
+  text-transform: lowercase;
+}
+
+.mobile-nav-item--active .mobile-nav-label {
+  font-weight: 700;
+  color: var(--color-cream);
+}
+
+.mobile-nav-arrow {
+  color: var(--color-coral);
+  font-size: 14px;
+}
+
+.mobile-nav-item a:hover .mobile-nav-label {
+  color: var(--color-cream);
+}
+
+.mobile-nav-item a:focus-visible {
+  outline: 3px solid var(--color-coral);
+  outline-offset: 2px;
+}
+
+/* Filters section (PostFilters in inline mode) */
+.mobile-nav-filters {
+  flex: 1;
+  padding: 20px 20px 0;
+  overflow-y: auto;
+}
+
+/* Footer */
+.mobile-nav-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 9px;
+  color: rgba(243, 237, 226, 0.2);
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+  margin-top: auto;
+}

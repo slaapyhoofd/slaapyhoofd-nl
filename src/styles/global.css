@@ -3,19 +3,33 @@
 @import './reset.css';
 
 body {
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
-  color: var(--color-text);
+  color: var(--color-ink);
   background-color: var(--color-background);
+}
+
+/* Sticky footer: app fills full viewport height */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
 }
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
   margin-bottom: var(--spacing-md);
-  color: var(--color-primary-dark);
+  color: var(--color-forest);
+  text-transform: lowercase;
+  letter-spacing: 0.01em;
 }
 
 h1 {
@@ -47,13 +61,13 @@ p {
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--color-pine);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 a:hover {
-  color: var(--color-primary-light);
+  color: var(--color-moss);
   text-decoration: underline;
 }
 
@@ -99,53 +113,53 @@ a:hover {
 .pb-lg { padding-bottom: var(--spacing-lg); }
 .pb-xl { padding-bottom: var(--spacing-xl); }
 
-/* Buttons */
+/* Buttons — sharp/square, no border-radius */
 .btn {
   display: inline-block;
   padding: var(--spacing-sm) var(--spacing-lg);
-  font-weight: var(--font-weight-medium);
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   text-align: center;
-  border-radius: var(--radius-md);
-  transition: all var(--transition-base);
+  border-radius: 0;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
   cursor: pointer;
   border: 1px solid transparent;
 }
 
 .btn:focus-visible {
-  outline: 3px solid var(--color-primary);
+  outline: 3px solid var(--color-coral);
   outline-offset: 2px;
 }
 
 .btn-primary {
-  background-color: var(--color-primary);
-  color: white;
+  background-color: var(--color-coral);
+  color: var(--color-cream);
+  border-color: var(--color-coral);
 }
 
 .btn-primary:hover {
-  background-color: var(--color-primary-light);
+  background-color: var(--color-coral-hover);
+  border-color: var(--color-coral-hover);
   text-decoration: none;
+  color: var(--color-cream);
 }
 
 .btn-secondary {
-  background-color: var(--color-secondary);
-  color: var(--color-text);
-  border-color: var(--color-border);
+  background-color: transparent;
+  color: var(--color-pine);
+  border-color: var(--color-pine);
 }
 
 .btn-secondary:hover {
-  background-color: var(--color-secondary-dark);
+  background-color: var(--color-pine);
+  color: var(--color-cream);
   text-decoration: none;
 }
 
-.btn-accent {
-  background-color: var(--color-accent);
-  color: var(--color-text); /* dark text: 6.97:1 on accent — passes AA */
-}
-
-.btn-accent:hover {
-  background-color: var(--color-accent-hover);
-  text-decoration: none;
-}
+/* Removed: .btn-accent (old soft pink) — use .btn-primary for coral CTAs */
 
 /* Forms */
 .form-group {
@@ -156,24 +170,28 @@ a:hover {
   display: block;
   margin-bottom: var(--spacing-xs);
   font-weight: var(--font-weight-medium);
-  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  color: var(--color-ink);
 }
 
 .form-input,
 .form-textarea {
   width: 100%;
   padding: var(--spacing-sm) var(--spacing-md);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--color-parchment);
+  border-radius: 2px;
+  font-family: var(--font-body);
   font-size: var(--font-size-base);
+  background: var(--color-background);
+  color: var(--color-ink);
   transition: border-color var(--transition-fast);
 }
 
 .form-input:focus-visible,
 .form-textarea:focus-visible {
-  outline: 3px solid var(--color-primary);
+  outline: 3px solid var(--color-pine);
   outline-offset: 2px;
-  border-color: var(--color-primary);
+  border-color: var(--color-pine);
 }
 
 .form-textarea {
@@ -181,18 +199,12 @@ a:hover {
   resize: vertical;
 }
 
-/* Cards */
+/* Cards — flat, no border-radius, no shadow */
 .card {
-  background-color: var(--color-background);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  background-color: var(--color-cream);
+  border: 1px solid var(--color-sand);
+  border-radius: 0;
   padding: var(--spacing-lg);
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow var(--transition-base);
-}
-
-.card:hover {
-  box-shadow: var(--shadow-md);
 }
 
 /* Accessibility */
@@ -213,19 +225,20 @@ a:hover {
   position: absolute;
   top: -9999px;
   left: var(--spacing-md);
-  background: var(--color-primary);
-  color: var(--color-secondary);
+  background: var(--color-forest);
+  color: var(--color-cream);
   padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-md);
+  border-radius: 0;
   z-index: var(--z-fixed);
   text-decoration: none;
-  font-weight: var(--font-weight-medium);
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-semibold);
   white-space: nowrap;
 }
 .skip-link:focus,
 .skip-link:focus-visible {
   top: var(--spacing-md);
-  outline: 3px solid var(--color-accent);
+  outline: 3px solid var(--color-coral);
   outline-offset: 2px;
 }
 
@@ -234,8 +247,8 @@ a:hover {
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 3px solid var(--color-border);
-  border-top-color: var(--color-primary);
+  border: 3px solid var(--color-sand);
+  border-top-color: var(--color-pine);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -257,6 +270,26 @@ a:hover {
   margin-top: var(--spacing-xs);
 }
 
+/* Status badges — brand tokens, no rounded corners */
+.status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 0;
+}
+
+.status-published  { background: var(--color-forest); color: var(--color-cream); }
+.status-draft      { background: var(--color-sand);   color: var(--color-mid); }
+.status-archived   { background: var(--color-parchment); color: var(--color-mid); }
+.status-pending    { background: #fff3cd; color: #7a5c00; }
+.status-approved   { background: var(--color-forest); color: var(--color-cream); }
+.status-spam       { background: #f8d7da; color: #6b1d22; }
+.status-rejected   { background: var(--color-sand);   color: var(--color-mid); }
+
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -267,10 +300,9 @@ a:hover {
     transition-duration: 0.01ms !important;
   }
 
-  /* Replace spinning animation with a static indicator */
   .loading {
     animation: none;
-    border: 3px solid var(--color-primary);
+    border: 3px solid var(--color-pine);
     opacity: 0.5;
   }
 }

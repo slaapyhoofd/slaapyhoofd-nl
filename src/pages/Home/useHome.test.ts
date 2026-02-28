@@ -1,4 +1,5 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
+import { CategoriesProvider } from '@/contexts/CategoriesContext';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { useHome } from './useHome';
 import * as postsService from '@/services/posts';
@@ -16,7 +17,7 @@ describe('useHome hook', () => {
       data: { posts: [] },
     } as any);
 
-    const { result } = renderHook(() => useHome());
+    const { result } = renderHook(() => useHome(), { wrapper: CategoriesProvider });
 
     expect(result.current.loading).toBe(true);
     expect(result.current.posts).toEqual([]);
@@ -46,7 +47,7 @@ describe('useHome hook', () => {
       data: { posts: mockPosts },
     } as any);
 
-    const { result } = renderHook(() => useHome());
+    const { result } = renderHook(() => useHome(), { wrapper: CategoriesProvider });
 
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
@@ -70,7 +71,7 @@ describe('useHome hook', () => {
       data: { posts: mockPosts },
     } as any);
 
-    const { result } = renderHook(() => useHome());
+    const { result } = renderHook(() => useHome(), { wrapper: CategoriesProvider });
 
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
@@ -94,7 +95,7 @@ describe('useHome hook', () => {
       data: { posts: mockPosts },
     } as any);
 
-    const { result } = renderHook(() => useHome());
+    const { result } = renderHook(() => useHome(), { wrapper: CategoriesProvider });
 
     await waitFor(() => {
       expect(result.current.posts.length).toBe(3);
@@ -123,7 +124,7 @@ describe('useHome hook', () => {
       data: { posts: mockPosts },
     } as any);
 
-    const { result } = renderHook(() => useHome());
+    const { result } = renderHook(() => useHome(), { wrapper: CategoriesProvider });
 
     await waitFor(() => {
       expect(result.current.posts.length).toBe(3);
@@ -147,7 +148,7 @@ describe('useHome hook', () => {
       new Error('Network error')
     );
 
-    const { result } = renderHook(() => useHome());
+    const { result } = renderHook(() => useHome(), { wrapper: CategoriesProvider });
 
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
@@ -163,7 +164,7 @@ describe('useHome hook', () => {
       error: 'Server error',
     } as any);
 
-    const { result } = renderHook(() => useHome());
+    const { result } = renderHook(() => useHome(), { wrapper: CategoriesProvider });
 
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
@@ -181,7 +182,7 @@ describe('useHome hook', () => {
       data: { posts: mockPosts },
     } as any);
 
-    const { result } = renderHook(() => useHome());
+    const { result } = renderHook(() => useHome(), { wrapper: CategoriesProvider });
 
     await waitFor(() => {
       expect(result.current.posts.length).toBe(1);
@@ -204,7 +205,7 @@ describe('useHome hook', () => {
         data: { posts: [{ id: 1, title: 'Post 1' }] },
       } as any);
 
-    const { result } = renderHook(() => useHome());
+    const { result } = renderHook(() => useHome(), { wrapper: CategoriesProvider });
 
     await waitFor(() => {
       expect(result.current.error).toBe('Failed to load posts. Please try again later.');
@@ -224,7 +225,7 @@ describe('useHome hook', () => {
       data: { posts: [] },
     } as any);
 
-    const { result } = renderHook(() => useHome());
+    const { result } = renderHook(() => useHome(), { wrapper: CategoriesProvider });
 
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
@@ -241,7 +242,7 @@ describe('useHome hook', () => {
       data: { posts: null },
     } as any);
 
-    const { result } = renderHook(() => useHome());
+    const { result } = renderHook(() => useHome(), { wrapper: CategoriesProvider });
 
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
@@ -262,7 +263,7 @@ describe('useHome hook', () => {
       data: { posts: mockPosts },
     } as any);
 
-    const { result } = renderHook(() => useHome());
+    const { result } = renderHook(() => useHome(), { wrapper: CategoriesProvider });
 
     await waitFor(() => {
       expect(result.current.posts.length).toBe(3);

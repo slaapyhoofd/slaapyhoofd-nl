@@ -13,8 +13,8 @@ function PostEditorInner() {
 
   if (loading) {
     return (
-      <div className="container">
-        <div role="status" className="loading-container">
+      <div className="post-editor">
+        <div role="status" className="loading-container" style={{ padding: '2rem' }}>
           <div className="loading" aria-hidden="true"></div>
           <p>Loading post...</p>
         </div>
@@ -23,9 +23,8 @@ function PostEditorInner() {
   }
 
   return (
-    <div className="container">
-      <div className="post-editor">
-        <EditorHeader />
+    <div className="post-editor">
+      <EditorHeader />
 
         {error && (
           <div className="error-banner">
@@ -41,7 +40,6 @@ function PostEditorInner() {
           />
         </div>
       </div>
-    </div>
   );
 }
 

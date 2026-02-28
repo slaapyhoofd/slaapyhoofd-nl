@@ -16,7 +16,7 @@ function ModerationFilters() {
       {FILTER_OPTIONS.map((option) => (
         <button
           key={option.value}
-          className={`filter-btn ${filter === option.value ? 'active' : ''}`}
+          className={`filter-tab ${filter === option.value ? 'active' : ''}`}
           aria-pressed={filter === option.value}
           onClick={() => setFilter(option.value)}
         >
