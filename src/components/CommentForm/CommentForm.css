@@ -1,0 +1,72 @@
+.comment-form-container {
+  margin: var(--spacing-2xl) 0;
+  padding: var(--spacing-xl);
+  background: var(--color-secondary);
+  border-radius: 8px;
+}
+
+.comment-form-container h3 {
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-text);
+}
+
+.comment-form .form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.comment-form label {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.comment-form input,
+.comment-form textarea {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  transition: border-color 0.2s;
+}
+
+.comment-form input:focus-visible,
+.comment-form textarea:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+  border-color: var(--color-primary);
+}
+
+.comment-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.comment-form small {
+  display: block;
+  margin-top: var(--spacing-xs);
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+}
+
+.comment-success {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  background: var(--color-success);
+  color: white;
+  border-radius: 4px;
+}
+
+.comment-error {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  background: var(--color-error);
+  color: white;
+  border-radius: 4px;
+}
+
+.comment-form .btn {
+  margin-top: var(--spacing-md);
+}

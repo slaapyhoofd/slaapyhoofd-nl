@@ -1,0 +1,218 @@
+.comment-moderation {
+  padding: var(--spacing-2xl) 0;
+}
+
+.moderation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.moderation-header h1 {
+  color: var(--color-primary);
+  margin-bottom: 0;
+}
+
+.stats-summary {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.stat-badge {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.stat-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.stat-badge.approved {
+  background: #d4edda;
+  color: #155724;
+}
+
+.stat-badge.spam {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.moderation-filters {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
+.no-comments {
+  text-align: center;
+  padding: var(--spacing-3xl);
+  background: var(--color-secondary);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-light);
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.comment-card {
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  transition: all var(--transition-base);
+}
+
+.comment-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comment-card.status-pending {
+  border-left: 4px solid #ffc107;
+}
+
+.comment-card.status-approved {
+  border-left: 4px solid #28a745;
+}
+
+.comment-card.status-spam {
+  border-left: 4px solid #dc3545;
+  opacity: 0.7;
+}
+
+.comment-card.status-rejected {
+  border-left: 4px solid #6c757d;
+  opacity: 0.7;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-sm);
+}
+
+.comment-author {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.comment-author-name {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.comment-email {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
+
+.comment-meta {
+  display: flex;
+  gap: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.comment-ip {
+  font-family: var(--font-mono);
+  background: var(--color-secondary);
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.comment-content {
+  padding: var(--spacing-md);
+  background: var(--color-secondary);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.comment-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-transform: capitalize;
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-approved {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-spam {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.status-rejected {
+  background: #e2e3e5;
+  color: #383d41;
+}
+
+.btn-success {
+  background: #28a745;
+  color: white;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-warning {
+  background: #ffc107;
+  color: #212529;
+  border-color: #ffc107;
+}
+
+.btn-warning:hover {
+  background: #e0a800;
+  border-color: #d39e00;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .moderation-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+  }
+  
+  .stats-summary {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .comment-meta {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+}

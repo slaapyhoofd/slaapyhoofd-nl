@@ -1,0 +1,71 @@
+services:
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: slaapyhoofd-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./scripts/db-setup.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - slaapyhoofd-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u${DB_USER}", "-p${DB_PASS}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # PHP Apache Server
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: slaapyhoofd-api
+    restart: unless-stopped
+    ports:
+      - "${API_PORT:-8080}:80"
+    environment:
+      DB_HOST: ${DB_HOST:-db}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+    volumes:
+      - ./api:/var/www/html/api
+      - ./public/uploads:/var/www/html/public/uploads
+      - ./.htaccess:/var/www/html/.htaccess
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - slaapyhoofd-network
+
+  # phpMyAdmin (database management)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: slaapyhoofd-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "${PHPMYADMIN_PORT:-8081}:80"
+    environment:
+      PMA_HOST: ${DB_HOST:-db}
+      PMA_USER: ${DB_USER}
+      PMA_PASSWORD: ${DB_PASS}
+      PMA_ARBITRARY: 1
+    depends_on:
+      - db
+    networks:
+      - slaapyhoofd-network
+
+networks:
+  slaapyhoofd-network:
+    driver: bridge
+
+volumes:
+  db_data:
