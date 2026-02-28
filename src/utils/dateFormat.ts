@@ -6,10 +6,10 @@
  */
 export function formatDate(
   dateString: string,
-  format: 'short' | 'long' | 'relative' = 'short'
+  format: 'short' | 'long' | 'relative' = 'short',
 ): string {
   const date = new Date(dateString);
-  
+
   if (isNaN(date.getTime())) {
     return 'Invalid date';
   }
@@ -21,7 +21,7 @@ export function formatDate(
         month: 'short',
         day: 'numeric',
       });
-    
+
     case 'long':
       return date.toLocaleDateString('en-US', {
         year: 'numeric',
@@ -30,10 +30,10 @@ export function formatDate(
         hour: '2-digit',
         minute: '2-digit',
       });
-    
+
     case 'relative':
       return formatRelativeTime(date);
-    
+
     default:
       return dateString;
   }
@@ -74,7 +74,7 @@ export function formatRelativeTime(dateInput: Date | string): string {
 export function isToday(dateString: string): boolean {
   const date = new Date(dateString);
   const today = new Date();
-  
+
   return (
     date.getDate() === today.getDate() &&
     date.getMonth() === today.getMonth() &&

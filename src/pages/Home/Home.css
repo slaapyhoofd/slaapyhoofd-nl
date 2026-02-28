@@ -154,8 +154,12 @@
     height: 160px;
   }
 
-  .post-card-date-day { font-size: 48px; }
-  .post-card-date-month { font-size: 16px; }
+  .post-card-date-day {
+    font-size: 48px;
+  }
+  .post-card-date-month {
+    font-size: 16px;
+  }
 
   .posts-grid-secondary {
     flex-direction: column;

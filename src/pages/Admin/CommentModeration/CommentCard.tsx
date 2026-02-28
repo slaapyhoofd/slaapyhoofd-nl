@@ -14,26 +14,20 @@ function CommentCard({ comment }: CommentCardProps) {
       <div className="comment-header">
         <div className="comment-author">
           <span className="comment-author-name">{comment.author_name}</span>
-          {comment.author_email && (
-            <span className="comment-email">{comment.author_email}</span>
-          )}
+          {comment.author_email && <span className="comment-email">{comment.author_email}</span>}
         </div>
-        <span className={`status-badge status-${comment.status}`}>
-          {comment.status}
-        </span>
+        <span className={`status-badge status-${comment.status}`}>{comment.status}</span>
       </div>
 
       <div className="comment-meta">
-        <span>On: <strong>{comment.post_title}</strong></span>
+        <span>
+          On: <strong>{comment.post_title}</strong>
+        </span>
         <span>{formatDate(comment.created_at, 'relative')}</span>
-        {comment.ip_address && (
-          <span className="comment-ip">IP: {comment.ip_address}</span>
-        )}
+        {comment.ip_address && <span className="comment-ip">IP: {comment.ip_address}</span>}
       </div>
 
-      <div className="comment-content">
-        {comment.content}
-      </div>
+      <div className="comment-content">{comment.content}</div>
 
       <div className="comment-actions">
         {comment.status !== 'approved' && (

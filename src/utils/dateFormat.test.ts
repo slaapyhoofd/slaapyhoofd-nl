@@ -56,7 +56,7 @@ describe('dateFormat utils', () => {
   });
 
   describe('isToday', () => {
-    it('should return true for today\'s date', () => {
+    it("should return true for today's date", () => {
       const now = new Date();
       const result = isToday(now.toISOString());
       expect(result).toBe(true);

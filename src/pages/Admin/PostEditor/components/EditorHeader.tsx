@@ -7,25 +7,13 @@ function EditorHeader() {
     <header className="editor-header">
       <h1>{isEditing ? 'Edit Post' : 'Create New Post'}</h1>
       <div className="editor-actions">
-        <button
-          onClick={handleCancel}
-          className="btn btn-secondary"
-          disabled={saving}
-        >
+        <button onClick={handleCancel} className="btn btn-secondary" disabled={saving}>
           Cancel
         </button>
-        <button
-          onClick={handleSaveDraft}
-          className="btn btn-secondary"
-          disabled={saving}
-        >
+        <button onClick={handleSaveDraft} className="btn btn-secondary" disabled={saving}>
           {saving ? 'Saving...' : 'Save Draft'}
         </button>
-        <button
-          onClick={handlePublish}
-          className="btn btn-primary"
-          disabled={saving}
-        >
+        <button onClick={handlePublish} className="btn btn-primary" disabled={saving}>
           {saving ? 'Publishing...' : 'Publish'}
         </button>
       </div>

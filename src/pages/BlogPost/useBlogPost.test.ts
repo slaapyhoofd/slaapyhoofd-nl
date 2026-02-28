@@ -61,9 +61,7 @@ describe('useBlogPost hook', () => {
   });
 
   it('should handle loading error', async () => {
-    vi.mocked(postsService.getPostBySlug).mockRejectedValue(
-      new Error('Network error')
-    );
+    vi.mocked(postsService.getPostBySlug).mockRejectedValue(new Error('Network error'));
 
     const { result } = renderHook(() => useBlogPost('test-post'));
 
@@ -92,10 +90,9 @@ describe('useBlogPost hook', () => {
       .mockResolvedValueOnce({ success: true, data: mockPost1 } as any)
       .mockResolvedValueOnce({ success: true, data: mockPost2 } as any);
 
-    const { result, rerender } = renderHook(
-      ({ slug }) => useBlogPost(slug),
-      { initialProps: { slug: 'post-1' } }
-    );
+    const { result, rerender } = renderHook(({ slug }) => useBlogPost(slug), {
+      initialProps: { slug: 'post-1' },
+    });
 
     await waitFor(() => {
       expect(result.current.post?.id).toBe(1);
@@ -134,10 +131,9 @@ describe('useBlogPost hook', () => {
         data: { id: 1, slug: 'test', title: 'Test' },
       } as any);
 
-    const { result, rerender } = renderHook(
-      ({ slug }) => useBlogPost(slug),
-      { initialProps: { slug: 'test' } }
-    );
+    const { result, rerender } = renderHook(({ slug }) => useBlogPost(slug), {
+      initialProps: { slug: 'test' },
+    });
 
     await waitFor(() => {
       expect(result.current.error).toBe('Failed to load post');

@@ -13,7 +13,7 @@ function ModerationFilters() {
 
   return (
     <div className="moderation-filters">
-      {FILTER_OPTIONS.map((option) => (
+      {FILTER_OPTIONS.map(option => (
         <button
           key={option.value}
           className={`filter-tab ${filter === option.value ? 'active' : ''}`}

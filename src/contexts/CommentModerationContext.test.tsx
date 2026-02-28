@@ -122,9 +122,7 @@ describe('CommentModerationContext & useCommentModeration', () => {
   });
 
   it('should handle status change', async () => {
-    const mockComments = [
-      { id: 1, status: 'pending' } as any,
-    ];
+    const mockComments = [{ id: 1, status: 'pending' } as any];
 
     vi.mocked(commentsService.getAllComments).mockResolvedValue({
       success: true,
@@ -153,9 +151,7 @@ describe('CommentModerationContext & useCommentModeration', () => {
   });
 
   it('should handle delete with confirmation', async () => {
-    const mockComments = [
-      { id: 1, status: 'spam' } as any,
-    ];
+    const mockComments = [{ id: 1, status: 'spam' } as any];
 
     vi.mocked(commentsService.getAllComments).mockResolvedValue({
       success: true,
@@ -188,9 +184,7 @@ describe('CommentModerationContext & useCommentModeration', () => {
   });
 
   it('should not delete comment when user cancels', async () => {
-    const mockComments = [
-      { id: 1, status: 'spam' } as any,
-    ];
+    const mockComments = [{ id: 1, status: 'spam' } as any];
 
     vi.mocked(commentsService.getAllComments).mockResolvedValue({
       success: true,
@@ -226,9 +220,9 @@ describe('CommentModerationContext & useCommentModeration', () => {
                 success: true,
                 data: { comments: [] },
               } as any),
-            100
-          )
-        )
+            100,
+          ),
+        ),
     );
 
     const wrapper = ({ children }: { children: React.ReactNode }) => (

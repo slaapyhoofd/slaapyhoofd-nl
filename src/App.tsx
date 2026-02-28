@@ -40,15 +40,7 @@ function RouteAnnouncer() {
     return () => clearTimeout(timeout);
   }, [location.pathname]);
 
-  return (
-    <div
-      ref={ref}
-      role="status"
-      aria-live="polite"
-      aria-atomic="true"
-      className="sr-only"
-    />
-  );
+  return <div ref={ref} role="status" aria-live="polite" aria-atomic="true" className="sr-only" />;
 }
 
 /** Public layout: Header + main content + Footer */

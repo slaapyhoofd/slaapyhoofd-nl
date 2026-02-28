@@ -40,16 +40,28 @@ export function CategoriesProvider({ children }: { children: ReactNode }) {
   const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 
   return (
-    <CategoriesContext value={{
-      categories, selectedCategory, setCategories, setSelectedCategory,
-      years, selectedYear, setYears, setSelectedYear,
-      availableMonths, selectedMonth, setAvailableMonths, setSelectedMonth,
-    }}>
+    <CategoriesContext
+      value={{
+        categories,
+        selectedCategory,
+        setCategories,
+        setSelectedCategory,
+        years,
+        selectedYear,
+        setYears,
+        setSelectedYear,
+        availableMonths,
+        selectedMonth,
+        setAvailableMonths,
+        setSelectedMonth,
+      }}
+    >
       {children}
     </CategoriesContext>
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useCategories() {
   return useContext(CategoriesContext);
 }

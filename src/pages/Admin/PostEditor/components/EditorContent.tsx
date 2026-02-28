@@ -19,25 +19,29 @@ function EditorContent({ showPreview, renderMarkdownPreview }: EditorContentProp
   return (
     <div className="editor-main">
       <div className="form-group">
-        <label htmlFor="editor-title" className="form-label">Title *</label>
+        <label htmlFor="editor-title" className="form-label">
+          Title *
+        </label>
         <input
           id="editor-title"
           type="text"
           className="form-input"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={e => setTitle(e.target.value)}
           placeholder="Post title"
           required
         />
       </div>
 
       <div className="form-group">
-        <label htmlFor="editor-excerpt" className="form-label">Excerpt</label>
+        <label htmlFor="editor-excerpt" className="form-label">
+          Excerpt
+        </label>
         <textarea
           id="editor-excerpt"
           className="form-textarea"
           value={excerpt}
-          onChange={(e) => setExcerpt(e.target.value)}
+          onChange={e => setExcerpt(e.target.value)}
           placeholder="Brief summary..."
           rows={3}
         />
@@ -45,7 +49,9 @@ function EditorContent({ showPreview, renderMarkdownPreview }: EditorContentProp
 
       <div className="form-group">
         <div className="editor-toolbar">
-          <label htmlFor="editor-content" className="form-label">Content (Markdown) *</label>
+          <label htmlFor="editor-content" className="form-label">
+            Content (Markdown) *
+          </label>
           <button
             type="button"
             className="btn btn-secondary btn-sm"
@@ -61,15 +67,12 @@ function EditorContent({ showPreview, renderMarkdownPreview }: EditorContentProp
             id="editor-content"
             className="form-textarea editor-content"
             value={markdownContent}
-            onChange={(e) => setMarkdownContent(e.target.value)}
+            onChange={e => setMarkdownContent(e.target.value)}
             placeholder="Write your post in Markdown..."
             required
           />
         ) : (
-          <div 
-            className="markdown-preview"
-            dangerouslySetInnerHTML={renderMarkdownPreview()}
-          />
+          <div className="markdown-preview" dangerouslySetInnerHTML={renderMarkdownPreview()} />
         )}
       </div>
     </div>

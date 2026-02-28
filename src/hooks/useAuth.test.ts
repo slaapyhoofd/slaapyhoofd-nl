@@ -79,9 +79,7 @@ describe('useAuth hook', () => {
   });
 
   it('should handle getCurrentUser failure gracefully', async () => {
-    vi.mocked(authService.getCurrentUser).mockRejectedValue(
-      new Error('Network error')
-    );
+    vi.mocked(authService.getCurrentUser).mockRejectedValue(new Error('Network error'));
 
     const Wrapper = ({ children }: { children: React.ReactNode }) => {
       return AuthProvider({ children } as any) as any;

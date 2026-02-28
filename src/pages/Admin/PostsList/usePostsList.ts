@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import * as postsService from '@/services/posts';
 import { Post } from '@/types/post';
 
@@ -16,11 +16,7 @@ export function usePostsList(): UsePostsListReturn {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>('all');
 
-  useEffect(() => {
-    loadPosts();
-  }, [filter]);
-
-  const loadPosts = async () => {
+  const loadPosts = useCallback(async () => {
     setLoading(true);
     try {
       const filterStatus = filter === 'all' ? undefined : filter;
@@ -33,7 +29,11 @@ export function usePostsList(): UsePostsListReturn {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filter]);
+
+  useEffect(() => {
+    loadPosts();
+  }, [loadPosts]);
 
   const handleDelete = async (id: number) => {
     if (!confirm('Are you sure you want to delete this post?')) {

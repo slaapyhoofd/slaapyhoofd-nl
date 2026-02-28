@@ -12,7 +12,7 @@ const FILTER_OPTIONS = [
 function PostsFilters({ filter, onFilterChange }: PostsFiltersProps) {
   return (
     <div className="posts-filters">
-      {FILTER_OPTIONS.map((option) => (
+      {FILTER_OPTIONS.map(option => (
         <button
           key={option.value}
           className={`filter-tab${filter === option.value ? ' filter-tab--active' : ''}`}

@@ -9,8 +9,8 @@ interface PostsTableProps {
 
 const STATUS_DOT_COLORS: Record<string, string> = {
   published: '#2e7d32',
-  draft:     'var(--color-parchment)',
-  archived:  'var(--color-mid)',
+  draft: 'var(--color-parchment)',
+  archived: 'var(--color-mid)',
 };
 
 function PostsTable({ posts, onDelete }: PostsTableProps) {
@@ -31,20 +31,20 @@ function PostsTable({ posts, onDelete }: PostsTableProps) {
           </tr>
         </thead>
         <tbody>
-          {posts.map((post) => (
+          {posts.map(post => (
             <tr key={post.id}>
               <td className="post-title-cell">
                 <div className="post-title-main">{post.title}</div>
-                {post.excerpt && (
-                  <div className="post-excerpt">{post.excerpt}</div>
-                )}
+                {post.excerpt && <div className="post-excerpt">{post.excerpt}</div>}
               </td>
               <td className="post-category-cell">{post.category || '—'}</td>
               <td>
                 <div className="post-status">
                   <span
                     className="post-status-dot"
-                    style={{ background: STATUS_DOT_COLORS[post.status] ?? 'var(--color-parchment)' }}
+                    style={{
+                      background: STATUS_DOT_COLORS[post.status] ?? 'var(--color-parchment)',
+                    }}
                     aria-hidden="true"
                   />
                   <span>{post.status}</span>

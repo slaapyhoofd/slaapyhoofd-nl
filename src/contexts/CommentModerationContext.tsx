@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import * as commentsService from '@/services/comments';
 import { Comment } from '@/types/comment';
 
@@ -19,8 +19,11 @@ interface CommentModerationContextValue {
   handleDelete: (id: number) => Promise<void>;
 }
 
-const CommentModerationContext = createContext<CommentModerationContextValue | undefined>(undefined);
+const CommentModerationContext = createContext<CommentModerationContextValue | undefined>(
+  undefined,
+);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useCommentModeration() {
   const context = useContext(CommentModerationContext);
   if (!context) {
@@ -43,11 +46,7 @@ export function CommentModerationProvider({ children }: CommentModerationProvide
     spam: 0,
   });
 
-  useEffect(() => {
-    loadComments();
-  }, [filter]);
-
-  const loadComments = async () => {
+  const loadComments = useCallback(async () => {
     setLoading(true);
     try {
       const filterStatus = filter === 'all' ? undefined : filter;
@@ -55,7 +54,7 @@ export function CommentModerationProvider({ children }: CommentModerationProvide
       if (response.success && response.data) {
         const allComments = response.data.comments || [];
         setComments(allComments);
-        
+
         // Calculate stats from all comments
         calculateStats(allComments);
       }
@@ -64,13 +63,17 @@ export function CommentModerationProvider({ children }: CommentModerationProvide
     } finally {
       setLoading(false);
     }
-  };
+  }, [filter]);
+
+  useEffect(() => {
+    loadComments();
+  }, [loadComments]);
 
   const calculateStats = (allComments: Comment[]) => {
     setStats({
-      pending: allComments.filter((c) => c.status === 'pending').length,
-      approved: allComments.filter((c) => c.status === 'approved').length,
-      spam: allComments.filter((c) => c.status === 'spam').length,
+      pending: allComments.filter(c => c.status === 'pending').length,
+      approved: allComments.filter(c => c.status === 'approved').length,
+      spam: allComments.filter(c => c.status === 'spam').length,
     });
   };
 
@@ -118,9 +121,5 @@ export function CommentModerationProvider({ children }: CommentModerationProvide
   };
 
   // React 19: render context directly — no .Provider needed
-  return (
-    <CommentModerationContext value={value}>
-      {children}
-    </CommentModerationContext>
-  );
+  return <CommentModerationContext value={value}>{children}</CommentModerationContext>;
 }

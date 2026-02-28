@@ -28,23 +28,24 @@ function PostCard({ post, variant = 'secondary' }: PostCardProps) {
         const lastSentence = Math.max(
           chunk.lastIndexOf('. '),
           chunk.lastIndexOf('! '),
-          chunk.lastIndexOf('? ')
+          chunk.lastIndexOf('? '),
         );
-        bodyPreview = lastSentence > 60
-          ? chunk.slice(0, lastSentence + 1)
-          : chunk.replace(/\s+\S*$/, '') + '…';
+        bodyPreview =
+          lastSentence > 60 ? chunk.slice(0, lastSentence + 1) : chunk.replace(/\s+\S*$/, '') + '…';
       }
     }
 
     return (
       <article className="post-card post-card--featured">
-        <Link to={`/post/${post.slug}`} className="post-card-image-block" aria-label={`Read more about ${post.title}`}>
+        <Link
+          to={`/post/${post.slug}`}
+          className="post-card-image-block"
+          aria-label={`Read more about ${post.title}`}
+        >
           {post.featured_image && (
             <img src={post.featured_image} alt="" aria-hidden="true" loading="eager" />
           )}
-          {post.category && (
-            <span className="post-card-category">{post.category}</span>
-          )}
+          {post.category && <span className="post-card-category">{post.category}</span>}
           <div className="post-card-date-watermark" aria-hidden="true">
             <div className="post-card-date-day">{day}</div>
             <div className="post-card-date-month">{month}</div>
@@ -53,15 +54,17 @@ function PostCard({ post, variant = 'secondary' }: PostCardProps) {
         </Link>
 
         <div className="post-card-body">
-          {post.excerpt && (
-            <p className="post-card-excerpt">{post.excerpt}</p>
-          )}
-          {bodyPreview && (
-            <p className="post-card-body-preview">{bodyPreview}</p>
-          )}
+          {post.excerpt && <p className="post-card-excerpt">{post.excerpt}</p>}
+          {bodyPreview && <p className="post-card-body-preview">{bodyPreview}</p>}
           <div className="post-card-footer">
-            <span className="post-card-meta">{post.author} · {formatDate(date)}</span>
-            <Link to={`/post/${post.slug}`} className="post-card-read" aria-label={`Read more about ${post.title}`}>
+            <span className="post-card-meta">
+              {post.author} · {formatDate(date)}
+            </span>
+            <Link
+              to={`/post/${post.slug}`}
+              className="post-card-read"
+              aria-label={`Read more about ${post.title}`}
+            >
               Read →
             </Link>
           </div>
@@ -77,28 +80,34 @@ function PostCard({ post, variant = 'secondary' }: PostCardProps) {
           <img src={post.featured_image} alt={post.title} loading="lazy" />
         </div>
       )}
-      {post.category && (
-        <span className="post-card-category">{post.category}</span>
-      )}
+      {post.category && <span className="post-card-category">{post.category}</span>}
       <h2 className="post-card-title">
         <Link to={`/post/${post.slug}`}>{post.title}</Link>
       </h2>
-      {post.excerpt && (
-        <p className="post-card-excerpt">{post.excerpt}</p>
-      )}
+      {post.excerpt && <p className="post-card-excerpt">{post.excerpt}</p>}
       <div className="post-card-footer">
         <span className="post-card-meta">
           <span className="post-card-author">{post.author}</span>
-          <span className="post-card-separator" aria-hidden="true"> · </span>
+          <span className="post-card-separator" aria-hidden="true">
+            {' '}
+            ·{' '}
+          </span>
           <span className="post-card-date">{formatDate(date)}</span>
           {post.views > 0 && (
             <>
-              <span className="post-card-separator" aria-hidden="true"> · </span>
+              <span className="post-card-separator" aria-hidden="true">
+                {' '}
+                ·{' '}
+              </span>
               <span className="post-card-views">{post.views} views</span>
             </>
           )}
         </span>
-        <Link to={`/post/${post.slug}`} className="post-card-read" aria-label={`Read more about ${post.title}`}>
+        <Link
+          to={`/post/${post.slug}`}
+          className="post-card-read"
+          aria-label={`Read more about ${post.title}`}
+        >
           Read more →
         </Link>
       </div>

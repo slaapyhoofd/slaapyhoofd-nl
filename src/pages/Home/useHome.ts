@@ -1,4 +1,4 @@
-import { useState, useEffect, useTransition } from 'react';
+import { useState, useEffect, useTransition, useMemo } from 'react';
 import { getPublishedPosts } from '@/services/posts';
 import { Post } from '@/types/post';
 import { useCategories } from '@/contexts/CategoriesContext';
@@ -20,9 +20,13 @@ export function useHome(): UseHomeReturn {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>('');
   const {
-    selectedCategory, setSelectedCategory: ctxSetSelected, setCategories,
-    selectedYear, setYears,
-    selectedMonth, setAvailableMonths,
+    selectedCategory,
+    setSelectedCategory: ctxSetSelected,
+    setCategories,
+    selectedYear,
+    setYears,
+    selectedMonth,
+    setAvailableMonths,
   } = useCategories();
   // startTransition marks category filtering as non-urgent, keeping UI responsive
   const [isPending, startTransition] = useTransition();
@@ -54,20 +58,23 @@ export function useHome(): UseHomeReturn {
   };
 
   // Unique categories
-  const categories = ['all', ...new Set(posts.filter(p => p.category).map(p => p.category as string))];
+  const categories = useMemo(
+    () => ['all', ...new Set(posts.filter(p => p.category).map(p => p.category as string))],
+    [posts],
+  );
 
   // Sync categories to context
   useEffect(() => {
     setCategories(categories);
-  }, [posts]);
+  }, [categories, setCategories]);
 
   // Sync available years to context
   useEffect(() => {
-    const years = [...new Set(
-      posts.map(p => new Date(p.published_at || p.created_at).getFullYear())
-    )].sort((a, b) => b - a);
+    const years = [
+      ...new Set(posts.map(p => new Date(p.published_at || p.created_at).getFullYear())),
+    ].sort((a, b) => b - a);
     setYears(years);
-  }, [posts]);
+  }, [posts, setYears]);
 
   // Sync available months for selected year to context
   useEffect(() => {
@@ -75,28 +82,29 @@ export function useHome(): UseHomeReturn {
       setAvailableMonths([]);
       return;
     }
-    const months = [...new Set(
-      posts
-        .filter(p => new Date(p.published_at || p.created_at).getFullYear() === selectedYear)
-        .map(p => new Date(p.published_at || p.created_at).getMonth())
-    )].sort((a, b) => a - b);
+    const months = [
+      ...new Set(
+        posts
+          .filter(p => new Date(p.published_at || p.created_at).getFullYear() === selectedYear)
+          .map(p => new Date(p.published_at || p.created_at).getMonth()),
+      ),
+    ].sort((a, b) => a - b);
     setAvailableMonths(months);
-  }, [selectedYear, posts]);
+  }, [selectedYear, posts, setAvailableMonths]);
 
   // Filter posts by category + year + month
-  let filteredPosts = selectedCategory === 'all'
-    ? posts
-    : posts.filter(p => p.category === selectedCategory);
+  let filteredPosts =
+    selectedCategory === 'all' ? posts : posts.filter(p => p.category === selectedCategory);
 
   if (selectedYear !== null) {
-    filteredPosts = filteredPosts.filter(p =>
-      new Date(p.published_at || p.created_at).getFullYear() === selectedYear
+    filteredPosts = filteredPosts.filter(
+      p => new Date(p.published_at || p.created_at).getFullYear() === selectedYear,
     );
   }
 
   if (selectedYear !== null && selectedMonth !== null) {
-    filteredPosts = filteredPosts.filter(p =>
-      new Date(p.published_at || p.created_at).getMonth() === selectedMonth
+    filteredPosts = filteredPosts.filter(
+      p => new Date(p.published_at || p.created_at).getMonth() === selectedMonth,
     );
   }
 

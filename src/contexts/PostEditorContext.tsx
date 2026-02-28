@@ -54,7 +54,7 @@ export function PostEditorProvider({ children }: { children: ReactNode }) {
   const [tags, setTags] = useState('');
   const [featuredImage, setFeaturedImage] = useState('');
   const [status, setStatus] = useState<'draft' | 'published'>('draft');
-  
+
   // UI state
   const [showPreview, setShowPreview] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -83,7 +83,7 @@ export function PostEditorProvider({ children }: { children: ReactNode }) {
   const loadPost = async (postId: number) => {
     setLoading(true);
     setError('');
-    
+
     try {
       const response = await postsService.getPost(postId);
       if (response.success && response.data) {
@@ -108,10 +108,16 @@ export function PostEditorProvider({ children }: { children: ReactNode }) {
 
   const validateForm = (): boolean => {
     const titleCheck = validateRequired(title, 'Title');
-    if (!titleCheck.valid) { setError(titleCheck.error); return false; }
+    if (!titleCheck.valid) {
+      setError(titleCheck.error);
+      return false;
+    }
 
     const contentCheck = validateRequired(markdownContent, 'Content');
-    if (!contentCheck.valid) { setError(contentCheck.error); return false; }
+    if (!contentCheck.valid) {
+      setError(contentCheck.error);
+      return false;
+    }
 
     return true;
   };
@@ -197,13 +203,10 @@ export function PostEditorProvider({ children }: { children: ReactNode }) {
   };
 
   // React 19: render context directly — no .Provider needed
-  return (
-    <PostEditorContext value={value}>
-      {children}
-    </PostEditorContext>
-  );
+  return <PostEditorContext value={value}>{children}</PostEditorContext>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function usePostEditor() {
   const context = useContext(PostEditorContext);
   if (!context) {

@@ -37,9 +37,18 @@
   border-radius: 0;
 }
 
-.stat-badge.pending  { background: var(--color-sand);    color: var(--color-ink); }
-.stat-badge.approved { background: var(--color-forest);  color: var(--color-cream); }
-.stat-badge.spam     { background: var(--color-parchment); color: var(--color-mid); }
+.stat-badge.pending {
+  background: var(--color-sand);
+  color: var(--color-ink);
+}
+.stat-badge.approved {
+  background: var(--color-forest);
+  color: var(--color-cream);
+}
+.stat-badge.spam {
+  background: var(--color-parchment);
+  color: var(--color-mid);
+}
 
 /* Filter tabs — same underline style as PostsList */
 .moderation-filters {
@@ -63,10 +72,14 @@
   text-transform: uppercase;
   color: var(--color-mid);
   cursor: pointer;
-  transition: color var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
-.moderation-filters .filter-tab:hover { color: var(--color-pine); }
+.moderation-filters .filter-tab:hover {
+  color: var(--color-pine);
+}
 .moderation-filters .filter-tab.active {
   color: var(--color-pine);
   border-bottom-color: var(--color-pine);
@@ -105,10 +118,20 @@
   border-color: var(--color-parchment);
 }
 
-.comment-card.status-pending  { border-left: 3px solid var(--color-amber); }
-.comment-card.status-approved { border-left: 3px solid var(--color-pine); }
-.comment-card.status-spam     { border-left: 3px solid var(--color-coral); opacity: 0.7; }
-.comment-card.status-rejected { border-left: 3px solid var(--color-parchment); opacity: 0.7; }
+.comment-card.status-pending {
+  border-left: 3px solid var(--color-amber);
+}
+.comment-card.status-approved {
+  border-left: 3px solid var(--color-pine);
+}
+.comment-card.status-spam {
+  border-left: 3px solid var(--color-coral);
+  opacity: 0.7;
+}
+.comment-card.status-rejected {
+  border-left: 3px solid var(--color-parchment);
+  opacity: 0.7;
+}
 
 .comment-header {
   display: flex;
@@ -175,10 +198,22 @@
   border-radius: 0;
 }
 
-.status-pending  { background: var(--color-sand);    color: var(--color-ink); }
-.status-approved { background: var(--color-forest);  color: var(--color-cream); }
-.status-spam     { background: #f8d7da; color: #6b1d22; }
-.status-rejected { background: var(--color-sand);    color: var(--color-mid); }
+.status-pending {
+  background: var(--color-sand);
+  color: var(--color-ink);
+}
+.status-approved {
+  background: var(--color-forest);
+  color: var(--color-cream);
+}
+.status-spam {
+  background: #f8d7da;
+  color: #6b1d22;
+}
+.status-rejected {
+  background: var(--color-sand);
+  color: var(--color-mid);
+}
 
 /* Action buttons */
 .btn-success {

@@ -43,20 +43,16 @@ function CommentSection({ postId }: CommentSectionProps) {
   return (
     <div className="comment-section">
       <h3>Comments ({comments.length})</h3>
-      
+
       <div className="comments-list">
-        {comments.map((comment) => (
+        {comments.map(comment => (
           <div key={comment.id} className="comment-item">
             <div className="comment-header">
-            <span className="comment-author">{comment.author_name}</span>
-              <span className="comment-date">
-                {formatDate(comment.created_at, 'relative')}
-              </span>
+              <span className="comment-author">{comment.author_name}</span>
+              <span className="comment-date">{formatDate(comment.created_at, 'relative')}</span>
             </div>
-            
-            <div className="comment-content">
-              {comment.content}
-            </div>
+
+            <div className="comment-content">{comment.content}</div>
           </div>
         ))}
       </div>

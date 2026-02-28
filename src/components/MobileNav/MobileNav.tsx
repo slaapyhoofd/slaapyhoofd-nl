@@ -22,7 +22,9 @@ function MobileNav({ isOpen, onClose }: MobileNavProps) {
     } else {
       document.body.style.overflow = '';
     }
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isOpen]);
 
   // Close on Escape
@@ -76,10 +78,17 @@ function MobileNav({ isOpen, onClose }: MobileNavProps) {
           {navLinks.map(({ to, label }) => {
             const isActive = location.pathname === to;
             return (
-              <li key={to} className={`mobile-nav-item${isActive ? ' mobile-nav-item--active' : ''}`}>
+              <li
+                key={to}
+                className={`mobile-nav-item${isActive ? ' mobile-nav-item--active' : ''}`}
+              >
                 <Link to={to} onClick={onClose} tabIndex={isOpen ? 0 : -1}>
                   <span className="mobile-nav-label">{label}</span>
-                  {isActive && <span className="mobile-nav-arrow" aria-hidden="true">→</span>}
+                  {isActive && (
+                    <span className="mobile-nav-arrow" aria-hidden="true">
+                      →
+                    </span>
+                  )}
                 </Link>
               </li>
             );
@@ -89,21 +98,13 @@ function MobileNav({ isOpen, onClose }: MobileNavProps) {
 
       {/* Filters: topics + date, both shown inline (no tabs on mobile) */}
       <div className="mobile-nav-filters">
-        <PostFilters
-          mode="inline"
-          onFilterSelect={handleFilterSelect}
-          tabIndex={isOpen ? 0 : -1}
-        />
+        <PostFilters mode="inline" onFilterSelect={handleFilterSelect} tabIndex={isOpen ? 0 : -1} />
       </div>
 
       {/* Footer */}
-      <div className="mobile-nav-footer">
-        slaapyhoofd.nl · © {new Date().getFullYear()}
-      </div>
+      <div className="mobile-nav-footer">slaapyhoofd.nl · © {new Date().getFullYear()}</div>
     </div>
   );
 }
 
 export default MobileNav;
-
-

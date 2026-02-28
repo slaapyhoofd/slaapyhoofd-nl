@@ -23,13 +23,13 @@ export function renderMarkdown(markdown: string): string {
 export function sanitizeHtml(html: string): string {
   // Remove script tags and their content
   let sanitized = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-  
+
   // Remove event handlers (onclick, onerror, onload, etc.)
   sanitized = sanitized.replace(/\s+on\w+\s*=\s*["'][^"']*["']/gi, '');
-  
+
   // Remove script: protocol
   sanitized = sanitized.replace(/javascript:/gi, '');
-  
+
   return sanitized;
 }
 
@@ -57,10 +57,10 @@ export function markdownToPlainText(markdown: string): string {
  */
 export function generateExcerpt(markdown: string, maxLength = 160): string {
   const plainText = markdownToPlainText(markdown);
-  
+
   if (plainText.length <= maxLength) {
     return plainText;
   }
-  
+
   return plainText.substring(0, maxLength).trim() + '...';
 }

@@ -49,7 +49,7 @@ function Login() {
                 type="text"
                 className="form-input"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={e => setUsername(e.target.value)}
                 required
                 autoFocus
                 autoComplete="username"
@@ -66,7 +66,7 @@ function Login() {
                 type="password"
                 className="form-input"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
                 required
                 autoComplete="current-password"
                 disabled={loading}

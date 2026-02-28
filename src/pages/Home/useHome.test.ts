@@ -144,9 +144,7 @@ describe('useHome hook', () => {
   });
 
   it('should handle loading error', async () => {
-    vi.mocked(postsService.getPublishedPosts).mockRejectedValue(
-      new Error('Network error')
-    );
+    vi.mocked(postsService.getPublishedPosts).mockRejectedValue(new Error('Network error'));
 
     const { result } = renderHook(() => useHome(), { wrapper: CategoriesProvider });
 

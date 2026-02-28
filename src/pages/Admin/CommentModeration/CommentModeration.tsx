@@ -1,4 +1,7 @@
-import { CommentModerationProvider, useCommentModeration } from '@/contexts/CommentModerationContext';
+import {
+  CommentModerationProvider,
+  useCommentModeration,
+} from '@/contexts/CommentModerationContext';
 import ModerationStats from './ModerationStats';
 import ModerationFilters from './ModerationFilters';
 import CommentCard from './CommentCard';
@@ -28,7 +31,7 @@ function CommentModerationContent() {
 
   return (
     <div className="comments-list">
-      {comments.map((comment) => (
+      {comments.map(comment => (
         <CommentCard key={comment.id} comment={comment} />
       ))}
     </div>

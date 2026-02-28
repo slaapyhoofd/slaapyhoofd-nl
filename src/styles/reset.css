@@ -1,6 +1,8 @@
 /* CSS Reset - Minimal modern reset */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -18,7 +20,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-size: inherit;
   font-weight: inherit;
 }
@@ -28,11 +35,15 @@ a {
   text-decoration: inherit;
 }
 
-b, strong {
+b,
+strong {
   font-weight: bolder;
 }
 
-code, kbd, samp, pre {
+code,
+kbd,
+samp,
+pre {
   font-family: monospace;
   font-size: 1em;
 }
@@ -41,7 +52,8 @@ small {
   font-size: 80%;
 }
 
-sub, sup {
+sub,
+sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
@@ -62,7 +74,11 @@ table {
   border-collapse: collapse;
 }
 
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
   font-family: inherit;
   font-size: 100%;
   line-height: inherit;
@@ -71,11 +87,15 @@ button, input, optgroup, select, textarea {
   padding: 0;
 }
 
-button, select {
+button,
+select {
   text-transform: none;
 }
 
-button, [type='button'], [type='reset'], [type='submit'] {
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
   -webkit-appearance: button;
   background-color: transparent;
   background-image: none;
@@ -86,16 +106,25 @@ button {
   border: none;
 }
 
-img, svg, video, canvas, audio, iframe, embed, object {
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
   display: block;
   vertical-align: middle;
   max-width: 100%;
 }
 
-img, video {
+img,
+video {
   height: auto;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }

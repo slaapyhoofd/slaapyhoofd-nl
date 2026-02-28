@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { validateRequired, validateEmail, validateMaxLength, validateMinLength } from './validation';
+import {
+  validateRequired,
+  validateEmail,
+  validateMaxLength,
+  validateMinLength,
+} from './validation';
 
 describe('validateRequired', () => {
   it('returns invalid for empty string', () => {

@@ -29,10 +29,15 @@ function Dashboard() {
         commentsService.getAllComments(1, 1, 'pending'),
       ]);
       setStats({
-        totalPosts:       allRes.status === 'fulfilled'      ? (allRes.value.data?.pagination?.total      ?? 0) : 0,
-        publishedPosts:   publishedRes.status === 'fulfilled' ? (publishedRes.value.data?.pagination?.total ?? 0) : 0,
-        draftPosts:       draftRes.status === 'fulfilled'     ? (draftRes.value.data?.pagination?.total     ?? 0) : 0,
-        pendingComments:  commentsRes.status === 'fulfilled'  ? (commentsRes.value.data?.pagination?.total  ?? 0) : 0,
+        totalPosts: allRes.status === 'fulfilled' ? (allRes.value.data?.pagination?.total ?? 0) : 0,
+        publishedPosts:
+          publishedRes.status === 'fulfilled'
+            ? (publishedRes.value.data?.pagination?.total ?? 0)
+            : 0,
+        draftPosts:
+          draftRes.status === 'fulfilled' ? (draftRes.value.data?.pagination?.total ?? 0) : 0,
+        pendingComments:
+          commentsRes.status === 'fulfilled' ? (commentsRes.value.data?.pagination?.total ?? 0) : 0,
       });
     } catch (err) {
       console.error('Failed to load stats:', err);
@@ -47,12 +52,18 @@ function Dashboard() {
       {loading ? (
         <div className="dashboard-stats-belt">
           <div role="status" style={{ padding: '2rem', color: 'rgba(243,237,226,.5)' }}>
-            <div className="loading" aria-hidden="true" style={{ borderTopColor: 'var(--color-sage)' }}></div>
+            <div
+              className="loading"
+              aria-hidden="true"
+              style={{ borderTopColor: 'var(--color-sage)' }}
+            ></div>
           </div>
         </div>
       ) : error ? (
         <div className="dashboard-stats-belt">
-          <p role="alert" style={{ color: 'var(--color-coral)', padding: '2rem' }}>{error}</p>
+          <p role="alert" style={{ color: 'var(--color-coral)', padding: '2rem' }}>
+            {error}
+          </p>
         </div>
       ) : (
         <div className="dashboard-stats-belt">
@@ -85,17 +96,11 @@ function Dashboard() {
             <span className="action-card-eyebrow">New</span>
             <span className="action-card-title">Create Post</span>
           </button>
-          <button
-            className="action-card"
-            onClick={() => navigate('/admin/posts')}
-          >
+          <button className="action-card" onClick={() => navigate('/admin/posts')}>
             <span className="action-card-eyebrow">Manage</span>
             <span className="action-card-title">All Posts</span>
           </button>
-          <button
-            className="action-card"
-            onClick={() => navigate('/admin/comments')}
-          >
+          <button className="action-card" onClick={() => navigate('/admin/comments')}>
             <span className="action-card-eyebrow">Review</span>
             <span className="action-card-title">Comments</span>
           </button>

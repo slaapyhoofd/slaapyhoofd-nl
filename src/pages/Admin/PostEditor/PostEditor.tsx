@@ -26,20 +26,13 @@ function PostEditorInner() {
     <div className="post-editor">
       <EditorHeader />
 
-        {error && (
-          <div className="error-banner">
-            {error}
-          </div>
-        )}
+      {error && <div className="error-banner">{error}</div>}
 
-        <div className="editor-container">
-          <EditorSidebar />
-          <EditorContent 
-            showPreview={showPreview}
-            renderMarkdownPreview={renderMarkdownPreview}
-          />
-        </div>
+      <div className="editor-container">
+        <EditorSidebar />
+        <EditorContent showPreview={showPreview} renderMarkdownPreview={renderMarkdownPreview} />
       </div>
+    </div>
   );
 }
 

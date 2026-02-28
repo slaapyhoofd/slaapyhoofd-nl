@@ -71,7 +71,9 @@
   letter-spacing: 0.04em;
   color: rgba(243, 237, 226, 0.45);
   text-decoration: none;
-  transition: color var(--transition-fast), background-color var(--transition-fast);
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
   margin-top: 2px;
 }
 

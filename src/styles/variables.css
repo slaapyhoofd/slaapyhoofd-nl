@@ -1,99 +1,99 @@
 /* CSS Variables - Theme Configuration */
 :root {
   /* ── Brand Palette ── */
-  --color-forest:     #1A3828;   /* darkest green — header/nav/sidebar/mark bg */
-  --color-pine:       #2D5A3D;   /* main green — hero, CTAs */
-  --color-moss:       #4A8F62;   /* hover highlight */
-  --color-sage:       #83C490;   /* stat highlights */
-  --color-coral:      #E06848;   /* accent — CTAs, category pills, .nl mark */
-  --color-coral-hover:#C85A3C;   /* coral on hover */
-  --color-amber:      #F0A040;   /* secondary accent */
-  --color-cream:      #F3EDE2;   /* light background */
-  --color-sand:       #E4DACE;   /* slightly darker cream */
-  --color-parchment:  #CBC5BA;   /* borders, muted surfaces */
-  --color-ink:        #1C1C1C;   /* body text */
-  --color-mid:        #6A6A6A;   /* secondary text */
+  --color-forest: #1a3828; /* darkest green — header/nav/sidebar/mark bg */
+  --color-pine: #2d5a3d; /* main green — hero, CTAs */
+  --color-moss: #4a8f62; /* hover highlight */
+  --color-sage: #83c490; /* stat highlights */
+  --color-coral: #e06848; /* accent — CTAs, category pills, .nl mark */
+  --color-coral-hover: #c85a3c; /* coral on hover */
+  --color-amber: #f0a040; /* secondary accent */
+  --color-cream: #f3ede2; /* light background */
+  --color-sand: #e4dace; /* slightly darker cream */
+  --color-parchment: #cbc5ba; /* borders, muted surfaces */
+  --color-ink: #1c1c1c; /* body text */
+  --color-mid: #6a6a6a; /* secondary text */
 
   /* ── Semantic aliases (backwards-compat + design intent) ── */
-  --color-primary:       var(--color-pine);
+  --color-primary: var(--color-pine);
   --color-primary-light: var(--color-moss);
-  --color-primary-dark:  var(--color-forest);
-  --color-secondary:     var(--color-cream);
-  --color-secondary-dark:var(--color-sand);
-  --color-accent:        var(--color-coral);
-  --color-accent-hover:  var(--color-coral-hover);
-  --color-text:          var(--color-ink);
-  --color-text-light:    var(--color-mid);
-  --color-text-lighter:  #767676; /* 4.54:1 AA on white — keep for compliance */
-  --color-background:    #ffffff;
-  --color-background-alt:var(--color-cream);
-  --color-border:        var(--color-parchment);
+  --color-primary-dark: var(--color-forest);
+  --color-secondary: var(--color-cream);
+  --color-secondary-dark: var(--color-sand);
+  --color-accent: var(--color-coral);
+  --color-accent-hover: var(--color-coral-hover);
+  --color-text: var(--color-ink);
+  --color-text-light: var(--color-mid);
+  --color-text-lighter: #767676; /* 4.54:1 AA on white — keep for compliance */
+  --color-background: #ffffff;
+  --color-background-alt: var(--color-cream);
+  --color-border: var(--color-parchment);
 
   /* UI State Colors */
   --color-success: #2e7d32; /* white on #2e7d32 = 4.6:1 AA */
-  --color-error:   #c62828; /* white on #c62828 = 5.9:1 AA */
+  --color-error: #c62828; /* white on #c62828 = 5.9:1 AA */
   --color-warning: #e65100; /* white on #e65100 = 3.8:1 (use with large/bold text only) */
-  --color-info:    #2196f3;
+  --color-info: #2196f3;
 
   /* Spacing Scale */
-  --spacing-xs: 0.25rem;    /* 4px */
-  --spacing-sm: 0.5rem;     /* 8px */
-  --spacing-md: 1rem;       /* 16px */
-  --spacing-lg: 1.5rem;     /* 24px */
-  --spacing-xl: 2rem;       /* 32px */
-  --spacing-2xl: 3rem;      /* 48px */
-  --spacing-3xl: 4rem;      /* 64px */
-  
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.5rem; /* 8px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 1.5rem; /* 24px */
+  --spacing-xl: 2rem; /* 32px */
+  --spacing-2xl: 3rem; /* 48px */
+  --spacing-3xl: 4rem; /* 64px */
+
   /* Typography */
   --font-display: 'Barlow Semi Condensed', system-ui, sans-serif;
-  --font-body:    'DM Sans', system-ui, sans-serif;
-  --font-family:  var(--font-body);
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-family: var(--font-body);
   --font-mono: 'Courier New', Courier, monospace;
-  --font-size-xs: 0.75rem;   /* 12px */
-  --font-size-sm: 0.875rem;  /* 14px */
-  --font-size-base: 1rem;    /* 16px */
-  --font-size-lg: 1.125rem;  /* 18px */
-  --font-size-xl: 1.25rem;   /* 20px */
-  --font-size-2xl: 1.5rem;   /* 24px */
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
   --font-size-3xl: 1.875rem; /* 30px */
-  --font-size-4xl: 2.25rem;  /* 36px */
-  
+  --font-size-4xl: 2.25rem; /* 36px */
+
   /* Line Heights */
   --line-height-tight: 1.25;
   --line-height-base: 1.6;
   --line-height-relaxed: 1.8;
-  
+
   /* Font Weights */
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  
+
   /* Border Radius */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
   --radius-full: 9999px;
-  
+
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  
+
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
   --transition-slow: 350ms ease;
-  
+
   /* Layout */
   --max-width-sm: 640px;
   --max-width-md: 768px;
   --max-width-lg: 1024px;
   --max-width-xl: 1280px;
   --max-width-content: 900px;
-  
+
   /* Z-index layers */
   --z-base: 0;
   --z-dropdown: 100;

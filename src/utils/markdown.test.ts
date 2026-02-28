@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { renderMarkdown, sanitizeHtml, markdownToPlainText, generateExcerpt } from '@/utils/markdown';
+import {
+  renderMarkdown,
+  sanitizeHtml,
+  markdownToPlainText,
+  generateExcerpt,
+} from '@/utils/markdown';
 
 describe('markdown utils', () => {
   describe('renderMarkdown', () => {
@@ -81,7 +86,8 @@ describe('markdown utils', () => {
 
   describe('generateExcerpt', () => {
     it('should generate excerpt from markdown', () => {
-      const markdown = '# Title\n\nThis is a long article about testing. ' +
+      const markdown =
+        '# Title\n\nThis is a long article about testing. ' +
         'It has multiple sentences and paragraphs. We want to extract just the beginning.';
       const excerpt = generateExcerpt(markdown, 50);
       expect(excerpt.length).toBeLessThanOrEqual(53); // 50 + '...'

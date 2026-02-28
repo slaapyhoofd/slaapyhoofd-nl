@@ -1,7 +1,12 @@
 import { useActionState, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { submitComment } from '@/services/comments';
-import { validateRequired, validateEmail, validateMaxLength, validateMinLength } from '@/utils/validation';
+import {
+  validateRequired,
+  validateEmail,
+  validateMaxLength,
+  validateMinLength,
+} from '@/utils/validation';
 import './CommentForm.css';
 
 interface CommentFormState {
@@ -37,7 +42,7 @@ async function submitCommentAction(
   onSubmitSuccess: (() => void) | undefined,
   onOptimisticAdd: ((c: PendingComment) => void) | undefined,
   _prevState: CommentFormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<CommentFormState> {
   // Honeypot: silently succeed to avoid revealing detection to bots
   if (formData.get('website')) return { success: true };
@@ -80,7 +85,7 @@ async function submitCommentAction(
       onSubmitSuccess?.();
       return { success: true };
     }
-    return { error: (response as any).message || 'Failed to submit comment' };
+    return { error: response.message || 'Failed to submit comment' };
   } catch {
     return { error: 'Network error. Please try again.' };
   }
@@ -147,7 +152,7 @@ function CommentForm({ postId, onSubmitSuccess, onOptimisticAdd }: CommentFormPr
             id="content"
             name="content"
             value={content}
-            onChange={(e) => setContent(e.target.value)}
+            onChange={e => setContent(e.target.value)}
             required
             rows={5}
             maxLength={1000}

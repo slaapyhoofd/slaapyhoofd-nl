@@ -15,9 +15,15 @@ interface PostFiltersProps {
 function PostFilters({ mode, onFilterSelect, tabIndex }: PostFiltersProps) {
   const [activeTab, setActiveTab] = useState<'topics' | 'date'>('topics');
   const {
-    categories, selectedCategory, setSelectedCategory,
-    years, selectedYear, setSelectedYear,
-    availableMonths, selectedMonth, setSelectedMonth,
+    categories,
+    selectedCategory,
+    setSelectedCategory,
+    years,
+    selectedYear,
+    setSelectedYear,
+    availableMonths,
+    selectedMonth,
+    setSelectedMonth,
   } = useCategories();
 
   const handleCategory = (cat: string) => {
@@ -55,39 +61,40 @@ function PostFilters({ mode, onFilterSelect, tabIndex }: PostFiltersProps) {
     </div>
   );
 
-  const dateSection = years.length > 0 ? (
-    <div className="post-filters-section">
-      {mode === 'inline' && <span className="post-filters-label">Date</span>}
-      <div className="post-filters-pills">
-        {years.map(year => (
-          <button
-            key={year}
-            className={`post-filter-pill${selectedYear === year ? ' post-filter-pill--active' : ''}`}
-            aria-pressed={selectedYear === year}
-            onClick={() => handleYear(year)}
-            tabIndex={tabIndex}
-          >
-            {year}
-          </button>
-        ))}
-      </div>
-      {selectedYear !== null && availableMonths.length > 0 && (
-        <div className="post-filters-pills post-filters-pills--months">
-          {availableMonths.map(month => (
+  const dateSection =
+    years.length > 0 ? (
+      <div className="post-filters-section">
+        {mode === 'inline' && <span className="post-filters-label">Date</span>}
+        <div className="post-filters-pills">
+          {years.map(year => (
             <button
-              key={month}
-              className={`post-filter-pill post-filter-pill--sm${selectedMonth === month ? ' post-filter-pill--active' : ''}`}
-              aria-pressed={selectedMonth === month}
-              onClick={() => handleMonth(month)}
+              key={year}
+              className={`post-filter-pill${selectedYear === year ? ' post-filter-pill--active' : ''}`}
+              aria-pressed={selectedYear === year}
+              onClick={() => handleYear(year)}
               tabIndex={tabIndex}
             >
-              {MONTHS[month]}
+              {year}
             </button>
           ))}
         </div>
-      )}
-    </div>
-  ) : null;
+        {selectedYear !== null && availableMonths.length > 0 && (
+          <div className="post-filters-pills post-filters-pills--months">
+            {availableMonths.map(month => (
+              <button
+                key={month}
+                className={`post-filter-pill post-filter-pill--sm${selectedMonth === month ? ' post-filter-pill--active' : ''}`}
+                aria-pressed={selectedMonth === month}
+                onClick={() => handleMonth(month)}
+                tabIndex={tabIndex}
+              >
+                {MONTHS[month]}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    ) : null;
 
   if (mode === 'inline') {
     return (

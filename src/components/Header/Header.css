@@ -85,9 +85,15 @@
   background: var(--color-cream);
 }
 
-.header-hamburger span:nth-child(1) { width: 18px; }
-.header-hamburger span:nth-child(2) { width: 18px; }
-.header-hamburger span:nth-child(3) { width: 12px; }
+.header-hamburger span:nth-child(1) {
+  width: 18px;
+}
+.header-hamburger span:nth-child(2) {
+  width: 18px;
+}
+.header-hamburger span:nth-child(3) {
+  width: 12px;
+}
 
 .header-hamburger-close {
   color: var(--color-cream);

@@ -23,7 +23,7 @@ describe('AuthContext & AuthProvider', () => {
     render(
       <AuthProvider>
         <TestComponent />
-      </AuthProvider>
+      </AuthProvider>,
     );
 
     expect(screen.getByText('Auth Provider Loaded')).toBeInTheDocument();
@@ -40,21 +40,19 @@ describe('AuthContext & AuthProvider', () => {
     render(
       <AuthProvider>
         <div>Provider Ready</div>
-      </AuthProvider>
+      </AuthProvider>,
     );
 
     expect(authService.getCurrentUser).toHaveBeenCalled();
   });
 
   it('should handle checkAuth failure', async () => {
-    vi.mocked(authService.getCurrentUser).mockRejectedValue(
-      new Error('Network error')
-    );
+    vi.mocked(authService.getCurrentUser).mockRejectedValue(new Error('Network error'));
 
     render(
       <AuthProvider>
         <div>Provider Ready</div>
-      </AuthProvider>
+      </AuthProvider>,
     );
 
     // Component should still render even on auth check failure
@@ -76,7 +74,7 @@ describe('AuthContext & AuthProvider', () => {
     render(
       <AuthProvider>
         <TestComponent />
-      </AuthProvider>
+      </AuthProvider>,
     );
 
     expect(screen.getByText('Context Available')).toBeInTheDocument();

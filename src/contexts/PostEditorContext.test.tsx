@@ -1,5 +1,5 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { PostEditorProvider, usePostEditor } from './PostEditorContext';
 import * as postsService from '@/services/posts';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -140,7 +140,7 @@ describe('PostEditorContext & usePostEditor', () => {
         title: 'Test Post',
         markdown_content: '# Test Content',
         status: 'draft',
-      })
+      }),
     );
 
     expect(mockNavigate).toHaveBeenCalledWith('/admin/posts');
@@ -173,7 +173,7 @@ describe('PostEditorContext & usePostEditor', () => {
     expect(postsService.createPost).toHaveBeenCalledWith(
       expect.objectContaining({
         status: 'published',
-      })
+      }),
     );
   });
 
@@ -226,7 +226,7 @@ describe('PostEditorContext & usePostEditor', () => {
       123,
       expect.objectContaining({
         title: 'Updated Title',
-      })
+      }),
     );
   });
 
@@ -310,7 +310,7 @@ describe('PostEditorContext & usePostEditor', () => {
         title: 'Test Post',
         markdown_content: '# Test Content',
         category: 'Programming',
-      })
+      }),
     );
   });
 });

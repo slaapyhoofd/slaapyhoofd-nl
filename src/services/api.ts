@@ -10,10 +10,7 @@ export function setCsrfToken(token: string) {
 
 const MUTATING_METHODS = new Set(['POST', 'PUT', 'DELETE', 'PATCH']);
 
-async function fetchAPI<T>(
-  endpoint: string,
-  options: RequestInit = {}
-): Promise<ApiResponse<T>> {
+async function fetchAPI<T>(endpoint: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
   const url = `${config.apiBaseUrl}${endpoint}`;
   const method = (options.method ?? 'GET').toUpperCase();
 

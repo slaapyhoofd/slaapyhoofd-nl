@@ -13,7 +13,8 @@ function AdminLayout() {
     navigate('/admin/login');
   }, [logout, navigate]);
 
-  const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
+  const isActive = (path: string) =>
+    location.pathname === path || location.pathname.startsWith(path + '/');
 
   return (
     <div className="admin-shell">
@@ -48,10 +49,7 @@ function AdminLayout() {
 
         <div className="admin-sidebar-footer">
           <span className="admin-sidebar-user">{user?.username}</span>
-          <button
-            className="admin-logout-btn"
-            onClick={handleLogout}
-          >
+          <button className="admin-logout-btn" onClick={handleLogout}>
             Logout
           </button>
         </div>

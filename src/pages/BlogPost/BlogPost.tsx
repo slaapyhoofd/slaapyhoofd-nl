@@ -22,7 +22,7 @@ function BlogPost() {
   // React 19: useOptimistic shows submitted comment immediately while it awaits moderation
   const [pendingComments, addPendingComment] = useOptimistic(
     [] as PendingComment[],
-    (state, comment: PendingComment) => [...state, comment]
+    (state, comment: PendingComment) => [...state, comment],
   );
 
   if (loading) {
@@ -39,7 +39,9 @@ function BlogPost() {
       <div className="blog-post-error">
         <h1>Post Not Found</h1>
         <p>{error || 'The post you are looking for does not exist.'}</p>
-        <Link to="/" className="btn btn-primary">Back to Home</Link>
+        <Link to="/" className="btn btn-primary">
+          Back to Home
+        </Link>
       </div>
     );
   }
@@ -64,16 +66,12 @@ function BlogPost() {
           <div className="blog-post-hero-date-day">{day}</div>
           <div className="blog-post-hero-date-month">{month}</div>
         </div>
-        {post.category && (
-          <span className="blog-post-category">{post.category}</span>
-        )}
+        {post.category && <span className="blog-post-category">{post.category}</span>}
         <h1 className="blog-post-title">{post.title}</h1>
         <div className="blog-post-meta">
           <span className="post-author">{post.author}</span>
           <span className="post-date">{formatDate(date)}</span>
-          {post.views > 0 && (
-            <span className="post-views">{post.views} views</span>
-          )}
+          {post.views > 0 && <span className="post-views">{post.views} views</span>}
         </div>
       </header>
 
@@ -84,22 +82,23 @@ function BlogPost() {
           </div>
         )}
 
-        <div
-          className="blog-post-content"
-          dangerouslySetInnerHTML={{ __html: postHtml }}
-        />
+        <div className="blog-post-content" dangerouslySetInnerHTML={{ __html: postHtml }} />
 
         {post.tags && (
           <div className="blog-post-tags">
             <strong>Tags:</strong>
             {post.tags.split(',').map((tag: string, index: number) => (
-              <span key={index} className="tag">{tag.trim()}</span>
+              <span key={index} className="tag">
+                {tag.trim()}
+              </span>
             ))}
           </div>
         )}
 
         <div className="blog-post-footer">
-          <Link to="/" className="btn btn-secondary">← Back to Home</Link>
+          <Link to="/" className="btn btn-secondary">
+            ← Back to Home
+          </Link>
         </div>
 
         <CommentSection postId={post.id} />
@@ -107,7 +106,7 @@ function BlogPost() {
         {/* Optimistic pending comments — visible during form submission transition */}
         {pendingComments.length > 0 && (
           <div className="pending-comments">
-            {pendingComments.map((c) => (
+            {pendingComments.map(c => (
               <div key={c.tempId} className="comment-item comment-item--pending">
                 <div className="comment-header">
                   <strong className="comment-author">{c.author_name}</strong>

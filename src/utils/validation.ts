@@ -20,14 +20,22 @@ export function validateEmail(email: string): ValidationResult {
   return { valid: true, error: '' };
 }
 
-export function validateMaxLength(value: string, max: number, fieldName = 'Field'): ValidationResult {
+export function validateMaxLength(
+  value: string,
+  max: number,
+  fieldName = 'Field',
+): ValidationResult {
   if (value.length > max) {
     return { valid: false, error: `${fieldName} must be ${max} characters or fewer` };
   }
   return { valid: true, error: '' };
 }
 
-export function validateMinLength(value: string, min: number, fieldName = 'Field'): ValidationResult {
+export function validateMinLength(
+  value: string,
+  min: number,
+  fieldName = 'Field',
+): ValidationResult {
   if (value.trim().length < min) {
     return { valid: false, error: `${fieldName} must be at least ${min} characters` };
   }

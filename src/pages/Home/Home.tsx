@@ -4,13 +4,7 @@ import PostFilters from '@/components/PostFilters';
 import './Home.css';
 
 function Home() {
-  const {
-    loading,
-    error,
-    filteredPosts,
-    isPending,
-    loadPosts,
-  } = useHome();
+  const { loading, error, filteredPosts, isPending, loadPosts } = useHome();
 
   if (loading) {
     return (
@@ -25,7 +19,9 @@ function Home() {
     return (
       <div className="home-error">
         <p>{error}</p>
-        <button onClick={loadPosts} className="btn btn-primary">Try Again</button>
+        <button onClick={loadPosts} className="btn btn-primary">
+          Try Again
+        </button>
       </div>
     );
   }
@@ -38,7 +34,11 @@ function Home() {
       <section className="hero">
         <div className="hero-tagline">
           <div className="hero-eyebrow">A Dutch developer's notebook</div>
-          <h1 className="hero-title">Exploring ideas,<br />one post at a time.</h1>
+          <h1 className="hero-title">
+            Exploring ideas,
+            <br />
+            one post at a time.
+          </h1>
         </div>
 
         <div className="hero-filters">
@@ -47,9 +47,19 @@ function Home() {
       </section>
 
       {/* Posts grid */}
-      <section className="posts-section" aria-labelledby="posts-section-heading" aria-busy={isPending}>
-        <h2 id="posts-section-heading" className="sr-only">Posts</h2>
-        {isPending && <div className="posts-filtering" aria-live="polite" role="status">Filtering...</div>}
+      <section
+        className="posts-section"
+        aria-labelledby="posts-section-heading"
+        aria-busy={isPending}
+      >
+        <h2 id="posts-section-heading" className="sr-only">
+          Posts
+        </h2>
+        {isPending && (
+          <div className="posts-filtering" aria-live="polite" role="status">
+            Filtering...
+          </div>
+        )}
 
         {filteredPosts.length === 0 ? (
           <div className="no-posts">
@@ -64,7 +74,7 @@ function Home() {
 
             {/* Right: secondary posts stacked */}
             <div className="posts-grid-secondary">
-              {otherPosts.slice(0, 3).map((post) => (
+              {otherPosts.slice(0, 3).map(post => (
                 <PostCard key={post.id} post={post} variant="secondary" />
               ))}
             </div>
@@ -74,7 +84,7 @@ function Home() {
         {/* Additional posts below the grid */}
         {filteredPosts.length > 4 && (
           <div className="posts-list">
-            {filteredPosts.slice(4).map((post) => (
+            {filteredPosts.slice(4).map(post => (
               <PostCard key={post.id} post={post} variant="secondary" />
             ))}
           </div>

@@ -11,6 +11,7 @@ interface AuthContextType {
   checkAuth: () => Promise<void>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
@@ -31,7 +32,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         setUser(null);
         setCsrfToken('');
       }
-    } catch (error) {
+    } catch {
       setUser(null);
       setCsrfToken('');
     } finally {
@@ -60,9 +61,5 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   // React 19: render context directly — no .Provider needed
-  return (
-    <AuthContext value={{ user, loading, login, logout, checkAuth }}>
-      {children}
-    </AuthContext>
-  );
+  return <AuthContext value={{ user, loading, login, logout, checkAuth }}>{children}</AuthContext>;
 }
