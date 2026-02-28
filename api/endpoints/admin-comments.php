@@ -136,12 +136,10 @@ elseif ($method === 'DELETE') {
         }
         
         successResponse(['message' => 'Comment deleted']);
-        
+
     } catch (PDOException $e) {
         errorResponse('Database error: ' . $e->getMessage(), 500);
     }
-}
-
 } else {
     errorResponse('Method not allowed', 405);
 }

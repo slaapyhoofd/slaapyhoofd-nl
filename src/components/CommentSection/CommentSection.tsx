@@ -1,7 +1,6 @@
+import { useState, useEffect } from 'react';
 import { CommentWithReplies } from '@/types/comment';
-import { useFetch } from '@/hooks/useFetch';
-import { config } from '@/config';
-import { ApiResponse } from '@/types/api';
+import { getComments } from '@/services/comments';
 import { formatDate } from '@/utils/dateFormat';
 import './CommentSection.css';
 
@@ -10,12 +9,15 @@ interface CommentSectionProps {
 }
 
 function CommentSection({ postId }: CommentSectionProps) {
-  const { data, loading } = useFetch<ApiResponse<CommentWithReplies[]>>(
-    `${config.apiBaseUrl}/comments?post_id=${postId}`,
-    { credentials: 'include' }
-  );
+  const [comments, setComments] = useState<CommentWithReplies[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const comments = data?.data ?? [];
+  useEffect(() => {
+    getComments(postId).then(res => {
+      setComments(res.success && res.data ? res.data : []);
+      setLoading(false);
+    });
+  }, [postId]);
 
   if (loading) {
     return (

@@ -1,13 +1,18 @@
 .comment-form-container {
-  margin: var(--spacing-2xl) 0;
+  margin-top: var(--spacing-2xl);
   padding: var(--spacing-xl);
-  background: var(--color-secondary);
-  border-radius: 8px;
+  background: var(--color-sand);
+  border-top: 2px solid var(--color-forest);
 }
 
 .comment-form-container h3 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-forest);
+  text-transform: lowercase;
+  letter-spacing: 0.01em;
   margin-bottom: var(--spacing-lg);
-  color: var(--color-text);
 }
 
 .comment-form .form-group {
@@ -16,27 +21,33 @@
 
 .comment-form label {
   display: block;
-  margin-bottom: var(--spacing-sm);
-  font-weight: 600;
-  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-mid);
 }
 
 .comment-form input,
 .comment-form textarea {
   width: 100%;
-  padding: var(--spacing-md);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  font-family: var(--font-family);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--color-parchment);
+  border-radius: 0;
+  font-family: var(--font-body);
   font-size: var(--font-size-base);
-  transition: border-color 0.2s;
+  background: var(--color-background);
+  color: var(--color-ink);
+  transition: border-color var(--transition-fast);
 }
 
 .comment-form input:focus-visible,
 .comment-form textarea:focus-visible {
-  outline: 3px solid var(--color-primary);
+  outline: 3px solid var(--color-pine);
   outline-offset: 2px;
-  border-color: var(--color-primary);
+  border-color: var(--color-pine);
 }
 
 .comment-form textarea {
@@ -47,26 +58,33 @@
 .comment-form small {
   display: block;
   margin-top: var(--spacing-xs);
-  font-size: 0.875rem;
-  color: var(--color-text-light);
+  font-size: var(--font-size-xs);
+  color: var(--color-mid);
+  letter-spacing: 0.02em;
 }
 
 .comment-success {
   padding: var(--spacing-md);
-  margin-bottom: var(--spacing-lg);
-  background: var(--color-success);
-  color: white;
-  border-radius: 4px;
+  margin-bottom: var(--spacing-md);
+  background: var(--color-pine);
+  color: var(--color-cream);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .comment-error {
   padding: var(--spacing-md);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
   background: var(--color-error);
   color: white;
-  border-radius: 4px;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .comment-form .btn {
-  margin-top: var(--spacing-md);
+  margin-top: var(--spacing-sm);
 }
