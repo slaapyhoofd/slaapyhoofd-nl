@@ -29,6 +29,9 @@ jobs:
           VITE_APP_VERSION: ${{ github.event.release.tag_name || github.ref_name }}
         run: npm run build
 
+      - name: Generate sitemap
+        run: node scripts/generate-sitemap.js
+
       - name: Assemble deploy package
         run: |
           mkdir -p deploy-package
