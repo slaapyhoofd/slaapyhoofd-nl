@@ -57,6 +57,8 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
           local-dir: ./deploy-package/
+          timeout: 60000
+          dangerous-clean-slate: false
           # uploads/ is user content — never overwrite or delete it
           # .env is created once on the server manually — never overwrite it
           exclude: |
