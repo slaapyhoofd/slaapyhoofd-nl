@@ -1,0 +1,68 @@
+name: Deploy
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false  # never cancel an in-flight deploy
+
+jobs:
+  deploy:
+    name: Build & Deploy to Cloud86
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build React app
+        env:
+          VITE_APP_VERSION: ${{ github.event.release.tag_name || github.ref_name }}
+        run: npm run build
+
+      - name: Assemble deploy package
+        run: |
+          mkdir -p deploy-package
+
+          # React build output (index.html + assets/)
+          cp -r dist/. deploy-package/
+
+          # PHP backend
+          cp -r api deploy-package/api
+
+          # Apache config (.htaccess must be present for SPA routing + security headers)
+          cp .htaccess deploy-package/.htaccess
+
+          # Optional public files — copy only when present in the repo
+          [ -f public/robots.txt  ] && cp public/robots.txt  deploy-package/robots.txt  || true
+          [ -f public/sitemap.xml ] && cp public/sitemap.xml deploy-package/sitemap.xml || true
+
+          echo "Deploy package contents:"
+          find deploy-package -maxdepth 2 | sort
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          local-dir: ./deploy-package/
+          # uploads/ is user content — never overwrite or delete it
+          # .env is created once on the server manually — never overwrite it
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            uploads/**
+            .env
+            .env.example

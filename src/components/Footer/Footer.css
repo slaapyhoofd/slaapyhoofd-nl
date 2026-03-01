@@ -58,6 +58,16 @@
 .footer-copyright {
   font-size: 10px;
   color: rgba(243, 237, 226, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-version {
+  font-family: var(--font-mono, monospace);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
 }
 
 @media (max-width: 768px) {

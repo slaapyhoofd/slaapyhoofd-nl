@@ -23,4 +23,4 @@ export interface AuthResponse {
   error?: string;
 }
 
-export { ApiResponse };
+export type { ApiResponse };

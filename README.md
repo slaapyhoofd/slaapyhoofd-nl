@@ -1,5 +1,12 @@
 # Slaapyhoofd.nl Blog
 
+![CI](https://github.com/slaapyhoofd/slaapyhoofd-nl/actions/workflows/ci.yml/badge.svg)
+![Deploy](https://github.com/slaapyhoofd/slaapyhoofd-nl/actions/workflows/deploy.yml/badge.svg)
+![Tests](https://img.shields.io/badge/tests-123%20passing-brightgreen)
+![Node](https://img.shields.io/badge/node-%3E%3D20-blue)
+![React](https://img.shields.io/badge/react-19.2-61dafb)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 Ultra-fast, lightweight personal blog built with React 19.2, TypeScript, Vite, and PHP 8.
 
 Topics: programming, LEGO, traveling, DIY, Home Assistant, home lab, and green energy.
@@ -30,7 +37,7 @@ Topics: programming, LEGO, traveling, DIY, Home Assistant, home lab, and green e
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18+
+- Node.js 20+
 - Docker Desktop (recommended) — or PHP 8+ and MySQL 5.7+
 
 ### Installation
@@ -95,10 +102,69 @@ npm run test:coverage     # Coverage report
 ## Building & Deployment
 
 ```bash
-npm run build             # Production build
+npm run build             # Production build → dist/
 npm run preview           # Preview production build locally
-npm run deploy            # Build + FTP upload to Cloud86
+npm run typecheck         # TypeScript type-check (no emit)
 ```
+
+### CI — automatic on every push and PR
+
+Two GitHub Actions workflows run on every push to `main` or `develop` and on all pull requests:
+
+```
+lint ──────┐
+typecheck ─┼──► build   (only runs when all three pass)
+test ──────┘
+```
+
+| Job | Command |
+|-----|---------|
+| Lint | `npm run lint` + `npm run format:check` |
+| Typecheck | `npm run typecheck` |
+| Test | `npx vitest run` (123 tests) |
+| Build | `npm run build` |
+
+### Deploy — triggered by a GitHub Release
+
+The deploy workflow runs automatically when you **publish a GitHub Release**, and can also
+be triggered manually from the Actions tab.
+
+#### How to release
+
+1. Make sure CI is green on `main`
+2. Go to **GitHub → Releases → Draft a new release**
+3. Create a new tag (e.g. `v1.2.0`), add release notes, click **Publish release**
+4. The deploy workflow starts automatically:
+   - Builds the React app (`dist/`)
+   - Assembles a deploy package: `dist/` + `api/` + `.htaccess` + `robots.txt` / `sitemap.xml`
+   - FTPs only changed files to Cloud86 (diff-only upload)
+   - `uploads/` on the server is **never touched** — user images are safe
+
+#### What gets deployed
+
+```
+server root
+├── index.html        ← React app (Vite build)
+├── assets/           ← JS/CSS bundles (Vite build)
+├── .htaccess         ← Apache routing + security headers
+├── api/              ← PHP backend (all endpoints)
+├── robots.txt        ← if present in public/
+└── sitemap.xml       ← if present in public/
+```
+
+> `uploads/` is excluded from every deploy. It contains user-uploaded images that live
+> only on the server.
+
+#### Required GitHub secrets
+
+Add these in **Settings → Secrets and variables → Actions** before the first deploy:
+
+| Secret | Description |
+|--------|-------------|
+| `FTP_HOST` | FTP hostname (Cloud86) |
+| `FTP_USER` | FTP username |
+| `FTP_PASSWORD` | FTP password |
+| `FTP_SERVER_DIR` | Remote root path, e.g. `/slaapyhoofd.nl/` |
 
 ## Project Structure
 

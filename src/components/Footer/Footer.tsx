@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import './Footer.css';
 
+const version = import.meta.env.VITE_APP_VERSION as string | undefined;
+
 function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -16,7 +18,10 @@ function Footer() {
           </a>
           <a href="/rss">RSS</a>
         </div>
-        <span className="footer-copyright">© {currentYear}</span>
+        <span className="footer-copyright">
+          © {currentYear}
+          {version && <span className="footer-version">{version}</span>}
+        </span>
       </div>
     </footer>
   );

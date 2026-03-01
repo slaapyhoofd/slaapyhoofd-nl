@@ -163,7 +163,7 @@ describe('CommentModerationContext & useCommentModeration', () => {
     } as any);
 
     // Mock confirm dialog
-    global.confirm = vi.fn(() => true);
+    vi.stubGlobal('confirm', vi.fn(() => true));
 
     const wrapper = ({ children }: { children: React.ReactNode }) => (
       <CommentModerationProvider>{children}</CommentModerationProvider>
@@ -179,7 +179,7 @@ describe('CommentModerationContext & useCommentModeration', () => {
       await result.current.handleDelete(1);
     });
 
-    expect(global.confirm).toHaveBeenCalled();
+    expect(window.confirm).toHaveBeenCalled();
     expect(commentsService.deleteComment).toHaveBeenCalledWith(1);
   });
 
@@ -191,7 +191,7 @@ describe('CommentModerationContext & useCommentModeration', () => {
       data: { comments: mockComments },
     } as any);
 
-    global.confirm = vi.fn(() => false);
+    vi.stubGlobal('confirm', vi.fn(() => false));
 
     const wrapper = ({ children }: { children: React.ReactNode }) => (
       <CommentModerationProvider>{children}</CommentModerationProvider>

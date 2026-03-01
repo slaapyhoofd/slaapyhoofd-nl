@@ -28,6 +28,11 @@
   Header set X-XSS-Protection "1; mode=block"
 </IfModule>
 
+# Block direct access to sensitive files
+<FilesMatch "^\.env(\.example)?$">
+  Require all denied
+</FilesMatch>
+
 # Gzip compression
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
