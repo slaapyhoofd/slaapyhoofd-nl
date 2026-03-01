@@ -39,7 +39,7 @@ function Login() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="login-form">
+          <form onSubmit={handleSubmit} className="login-form" id="login-form">
             <div className="form-group">
               <label htmlFor="username" className="form-label">
                 Username
