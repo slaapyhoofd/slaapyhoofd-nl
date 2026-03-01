@@ -15,7 +15,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
-    "deploy": "npm run build && node scripts/generate-sitemap.js && node scripts/deploy.js",
+    "deploy": "npm run build && node scripts/generate-feeds.js && node scripts/deploy.js",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
     "docker:logs": "docker-compose logs -f",

@@ -2,6 +2,9 @@
   RewriteEngine On
   RewriteBase /
 
+  # RSS feed aliases — common variants all resolve to rss.xml
+  RewriteRule ^(rss|feed|rss\.xml|feed\.xml|atom\.xml|index\.xml)$ /rss.xml [L,R=301]
+
   # API requests - route to PHP endpoints
   RewriteRule ^api/posts/?$ api/endpoints/posts.php [L]
   RewriteRule ^api/posts/([a-zA-Z0-9\-]+)$ api/endpoints/posts.php [L]

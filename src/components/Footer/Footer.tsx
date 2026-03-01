@@ -16,7 +16,7 @@ function Footer() {
           <a href="https://github.com/slaapyhoofd" target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
-          <a href="/rss">RSS</a>
+          <a href="/rss.xml">RSS</a>
         </div>
         <span className="footer-copyright">
           © {currentYear}
